@@ -79,6 +79,8 @@ const HELP_TEXT =
 '                       running tests. Useful when development is focused on a   \n' +
 '                       small section of the app, and there is no need to retest \n' +
 '                       all components when runing a watch.                      \n' +
+'   --no-server       : When set to true, does not start a server even if the    \n' +
+'                       grunt operation requires one.                            \n' +
 '                                                                                \n' +
 ' IMPORTANT: Please note that while the grunt file exposes tasks in addition to  \n' +
 ' ---------  the ones listed below (no private tasks in grunt yet :( ), it is    \n' +
