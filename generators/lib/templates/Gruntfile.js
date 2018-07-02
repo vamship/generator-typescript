@@ -292,8 +292,12 @@ module.exports = function(grunt) {
 
         const tasks = validTasks[target];
         if (['unit'].indexOf(target) >= 0) {
-            const testSuite = grunt.option('test-suite');
+            let testSuite = grunt.option('test-suite');
             if (typeof testSuite === 'string' && testSuite.length > 0) {
+                if (!testSuite.endsWith('.js')) {
+                    grunt.log.warn('Adding .js suffix to test suite');
+                    testSuite = testSuite + '.js';
+                }
                 const path = WORKING.getChild(`test/${target}`).getFilePath(
                     testSuite
                 );
