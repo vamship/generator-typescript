@@ -127,6 +127,7 @@ module.exports = function(grunt) {
     const packageConfig = grunt.file.readJSON('package.json') || {};
 
     PROJECT.appName = packageConfig.name || '__UNKNOWN__';
+    PROJECT.unscopedName = PROJECT.appName.replace(/^@[^/]*\//, '');
     PROJECT.version = packageConfig.version || '__UNKNOWN__';
 
     // Shorthand references to key folders.
@@ -238,9 +239,11 @@ module.exports = function(grunt) {
         shell: {
             package: {
                 command: () => {
-                    const tag = `${PROJECT.appName}:${PROJECT.version}`;
-                    return `docker build --rm --tag ${tag} ${__dirname} --build-arg APP_NAME=${
-                        PROJECT.appName
+                    const tag = `${PROJECT.appName.replace(/^@/, '')}:${
+                        PROJECT.version
+                    }`;
+                    return `docker build --rm --tag ${tag} ${__dirname} --build-arg UNSCOPED_APP_NAME=${
+                        PROJECT.unscopedName
                     }`;
                 }
             }
@@ -474,6 +477,7 @@ module.exports = function(grunt) {
      *  - Cleaning up temporary files
      */
     grunt.registerTask('all', [
+        'clean',
         'format',
         'lint',
         'build',
