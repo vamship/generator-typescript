@@ -237,7 +237,7 @@ module.exports = function(grunt) {
          * - Build docker images using the docker cli
          */
         shell: {
-            package: {
+            dockerBuild: {
                 command: () => {
                     const tag = `${PROJECT.appName.replace(/^@/, '')}:${
                         PROJECT.version
@@ -466,7 +466,7 @@ module.exports = function(grunt) {
      * Packaging task - packages the application for release by building a
      * docker container.
      */
-    grunt.registerTask('package', ['shell:package']);
+    grunt.registerTask('package', ['shell:dockerBuild']);
 
     /**
      * Pre check in task. Intended to be run prior to commiting/pushing code.
