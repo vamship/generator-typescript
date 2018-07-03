@@ -1,10 +1,10 @@
 FROM node:8.11.3-alpine
-ARG UNSCOPED_APP_NAME
+ARG APP_NAME
 
 RUN mkdir -p app/logs
 
 ADD ./dist app/dist
-ADD ./.${UNSCOPED_APP_NAME}rc app/.${UNSCOPED_APP_NAME}rc
+ADD ./.${APP_NAME}rc app/.${APP_NAME}rc
 ADD ./package.json app/package.json
 ADD ./package-lock.json app/package-lock.json
 
