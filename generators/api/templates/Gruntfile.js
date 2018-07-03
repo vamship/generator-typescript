@@ -129,8 +129,18 @@ module.exports = function(grunt) {
     const packageConfig = grunt.file.readJSON('package.json') || {};
 
     PROJECT.appName = packageConfig.name || '__UNKNOWN__';
-    PROJECT.unscopedName = PROJECT.appName.replace(/^@[^/]*\//, '');
     PROJECT.version = packageConfig.version || '__UNKNOWN__';
+    PROJECT.unscopedName = PROJECT.appName.replace(/^@[^/]*\//, '');
+
+    <% if(projectCustomDockerRegistry) { -%>
+    PROJECT.dockerTag = `<%= projectCustomDockerRegistry %>/${PROJECT.unscopedName}:${
+        PROJECT.version
+    }`;
+    <% } else { %>
+    PROJECT.dockerTag = `${PROJECT.appName.replace(/^@/, '')}:${
+        PROJECT.version
+    }`;
+    <% } %>
 
     // Shorthand references to key folders.
     const SRC = PROJECT.getChild('src');
@@ -237,17 +247,16 @@ module.exports = function(grunt) {
         /**
          * Configuration for grunt-shell, which is used to execute:
          * - Build docker images using the docker cli
+         * - Publish docker images to ECR
          */
         shell: {
             dockerBuild: {
-                command: () => {
-                    const tag = `${PROJECT.appName.replace(/^@/, '')}:${
-                        PROJECT.version
-                    }`;
-                    return `docker build --rm --tag ${tag} ${__dirname} --build-arg UNSCOPED_APP_NAME=${
-                        PROJECT.unscopedName
-                    }`;
-                }
+                command: `docker build --rm --tag ${
+                    PROJECT.dockerTag
+                } ${__dirname} --build-arg APP_NAME=${PROJECT.unscopedName}`
+            },
+            dockerPublish: {
+                command: `docker push ${PROJECT.dockerTag}`
             }
         },
 
@@ -469,6 +478,11 @@ module.exports = function(grunt) {
      * docker container.
      */
     grunt.registerTask('package', ['shell:dockerBuild']);
+
+    /**
+     * Publish task - publishes an packaged image to the docker registry.
+     */
+    grunt.registerTask('publish', ['shell:dockerPublish']);
 
     /**
      * Pre check in task. Intended to be run prior to commiting/pushing code.
