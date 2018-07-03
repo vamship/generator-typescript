@@ -19,7 +19,8 @@ module.exports = class extends Generator {
 
         this.config.set('_projectType', 'api');
         return _prompts.getProjectInfo(this, true)
-             .then(() => { return _prompts.getAuthorInfo(this, true); });
+            .then(() => { return _prompts.getAuthorInfo(this, true); })
+            .then(() => { return _prompts.getDockerInfo(this, true); });
     }
 
     /**

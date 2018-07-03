@@ -55,7 +55,16 @@ const HELP_TEXT =
 '                       typescript sources.                                      \n' +
 '                                                                                \n' +
 '   dist              : Creates a distribution for the project in the dist       \n' +
-'                       directory, preparing the package for publication.        \n' +
+'                       directory, preparing for packaging and publication.      \n' +
+'                                                                                \n' +
+'   packge            : Packges the api server into a docker container. This     \n' +
+'                       task assumes that the server has been built, and prepared\n' +
+'                       for distribution.                                        \n' +
+'                                                                                \n' +
+'   publish           : Publishes a packaged docker container to a docker        \n' +
+'                       registry. This assumes that docker credentials have been \n' +
+'                       setup correctly, and that the package has already been   \n' +
+'                       created using the package task.                          \n' +
 '                                                                                \n' +
 '   test:[unit|api]   : Executes tests against source files. The type of test    \n' +
 '                       to execute is specified by the first sub target          \n' +
@@ -131,16 +140,15 @@ module.exports = function(grunt) {
     PROJECT.appName = packageConfig.name || '__UNKNOWN__';
     PROJECT.version = packageConfig.version || '__UNKNOWN__';
     PROJECT.unscopedName = PROJECT.appName.replace(/^@[^/]*\//, '');
-
-    <% if(projectCustomDockerRegistry) { -%>
-    PROJECT.dockerTag = `<%= projectCustomDockerRegistry %>/${PROJECT.unscopedName}:${
+<% if(dockerCustomRegistry) { -%>
+    PROJECT.dockerTag = `<%= dockerCustomRegistry %>/${PROJECT.unscopedName}:${
         PROJECT.version
     }`;
-    <% } else { %>
+<% } else { -%>
     PROJECT.dockerTag = `${PROJECT.appName.replace(/^@/, '')}:${
         PROJECT.version
     }`;
-    <% } %>
+<% } -%>
 
     // Shorthand references to key folders.
     const SRC = PROJECT.getChild('src');
