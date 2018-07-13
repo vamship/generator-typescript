@@ -48,12 +48,17 @@
         "test": "jest"
     },
     "lint-staged": {
-        "*.js": [
-            "eslint --fix",
-            "git add"
-        ],
-        "*.json": [
-            "git add"
+        "linters": {
+            "*.js": [
+                "eslint --fix",
+                "git add"
+            ],
+            "*.json": [
+                "git add"
+            ]
+        },
+        "ignore": [
+            "generators/api/templates/package.json"
         ]
     },
     "eslintConfig": {
