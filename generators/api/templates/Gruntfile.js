@@ -61,10 +61,14 @@ const HELP_TEXT =
 '                       task assumes that the server has been built, and prepared\n' +
 '                       for distribution.                                        \n' +
 '                                                                                \n' +
-'   publish           : Publishes a packaged docker container to a docker        \n' +
+'   publish[:[tags]]  : Publishes a packaged docker container to a docker        \n' +
 '                       registry. This assumes that docker credentials have been \n' +
 '                       setup correctly, and that the package has already been   \n' +
 '                       created using the package task.                          \n' +
+'                       This task accepts additional tags to associate with the  \n' +
+'                       repo when publishing. The image is always tagged and     \n' +
+'                       published with the current project version whether or    \n' +
+'                       not any additional tags are specified.                   \n' +
 '                                                                                \n' +
 '   test:[unit|api]   : Executes tests against source files. The type of test    \n' +
 '                       to execute is specified by the first sub target          \n' +
@@ -141,14 +145,15 @@ module.exports = function(grunt) {
     PROJECT.version = packageConfig.version || '__UNKNOWN__';
     PROJECT.unscopedName = PROJECT.appName.replace(/^@[^/]*\//, '');
 <% if(dockerCustomRegistry) { -%>
-    PROJECT.dockerTag = `<%= dockerCustomRegistry %>/${PROJECT.unscopedName}:${
+    PROJECT.dockerRepo = `<%= dockerCustomRegistry %>/${PROJECT.unscopedName}:${
         PROJECT.version
     }`;
 <% } else { -%>
-    PROJECT.dockerTag = `${PROJECT.appName.replace(/^@/, '')}:${
+    PROJECT.dockerRepo = `${PROJECT.appName.replace(/^@/, '')}:${
         PROJECT.version
     }`;
 <% } -%>
+    PROJECT.dockerTag = `${PROJECT.dockerRepo}:${PROJECT.version}`;
 
     // Shorthand references to key folders.
     const SRC = PROJECT.getChild('src');
@@ -265,6 +270,16 @@ module.exports = function(grunt) {
             },
             dockerPublish: {
                 command: `docker push ${PROJECT.dockerTag}`
+            },
+            dockerTagAndPublish: {
+                command: (tag) => {
+                    tag = tag || PROJECT.version;
+                    const targetTag = `${PROJECT.dockerRepo}:${tag}`;
+                    return [
+                        `docker tag ${PROJECT.dockerTag} ${targetTag}`,
+                        `docker push ${targetTag}`
+                    ].join('&&');
+                }
             }
         },
 
@@ -490,7 +505,12 @@ module.exports = function(grunt) {
     /**
      * Publish task - publishes an packaged image to the docker registry.
      */
-    grunt.registerTask('publish', ['shell:dockerPublish']);
+    grunt.registerTask('publish', (...tags) => {
+        const tasks = ['shell:dockerPublish'].concat(
+            tags.map((tag) => `shell:dockerTagAndPublish:${tag}`)
+        );
+        grunt.task.run(tasks);
+    });
 
     /**
      * Pre check in task. Intended to be run prior to commiting/pushing code.
