@@ -6,7 +6,7 @@ import _greetingRoutes from './greeting';
 import _healthRoutes from './health';
 import _testRoutes from './test';
 
-const { BadRequestError, NotFoundError, UnauthorizedError } = _httpErrors;
+const { BadRequestError, NotFoundError, UnauthorizedError, ForbiddenError } = _httpErrors;
 const { SchemaError } = _argErrors;
 const _config = _configProvider.getConfig();
 const _logger = _loggerProvider.getLogger('routes');
@@ -73,6 +73,17 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof UnauthorizedError) {
                 res.status(401).json({
+                    error: err.message
+                });
+            } else {
+                next(err);
+            }
+        });
+
+        _logger.trace('Setting up forbidden error handler');
+        app.use((err, req, res, next) => {
+            if (err instanceof ForbiddenError) {
+                res.status(403).json({
                     error: err.message
                 });
             } else {
