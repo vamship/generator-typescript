@@ -12,7 +12,7 @@ const {
     UnauthorizedError,
     ForbiddenError
 } = _httpErrors;
-const { DuplicateRecordError, ConcurrencyControlError } = _httpErrors;
+const { DuplicateRecordError, ConcurrencyControlError } = _dataErrors;
 
 /**
  * Configures and returns a set of routes based on a list of declarative route

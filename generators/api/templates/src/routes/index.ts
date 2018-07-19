@@ -16,7 +16,7 @@ const {
     UnauthorizedError,
     ForbiddenError
 } = _httpErrors;
-const { DuplicateRecordError, ConcurrencyControlError } = _httpErrors;
+const { DuplicateRecordError, ConcurrencyControlError } = _dataErrors;
 const { SchemaError } = _argErrors;
 const _config = _configProvider.getConfig();
 const _logger = _loggerProvider.getLogger('routes');
