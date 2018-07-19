@@ -3,10 +3,10 @@ ARG APP_NAME
 
 RUN mkdir -p app/logs
 
-ADD ./dist app/dist
-ADD ./.${APP_NAME}rc app/.${APP_NAME}rc
-ADD ./package.json app/package.json
-ADD ./package-lock.json app/package-lock.json
+COPY ./dist app/dist
+COPY ./.${APP_NAME}rc app/.${APP_NAME}rc
+COPY ./package.json app/package.json
+COPY ./package-lock.json app/package-lock.json
 
 WORKDIR app
 
