@@ -1,8 +1,18 @@
-import { args as _argErrors, http as _httpErrors } from '@vamship/error-types';
+import {
+    args as _argErrors,
+    data as _dataErrors,
+    http as _httpErrors
+} from '@vamship/error-types';
 import { Router } from 'express';
 
-const { BadRequestError, NotFoundError, UnauthorizedError } = _httpErrors;
 const { SchemaError } = _argErrors;
+const {
+    BadRequestError,
+    NotFoundError,
+    UnauthorizedError,
+    ForbiddenError
+} = _httpErrors;
+const { DuplicateRecordError, ConcurrencyControlError } = _httpErrors;
 
 /**
  * Configures and returns a set of routes based on a list of declarative route
@@ -20,8 +30,14 @@ router.get('/error/:type', (req, res, next) => {
             next(new NotFoundError());
         case 'unauthorized':
             next(new UnauthorizedError());
+        case 'forbidden':
+            next(new ForbiddenError());
         case 'schema':
             next(new SchemaError());
+        case 'duplicaterecord':
+            next(new DuplicateRecordError());
+        case 'concurrencycontrol':
+            next(new ConcurrencyControlError());
         case 'error':
         default:
             next(new Error());

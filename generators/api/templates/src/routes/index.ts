@@ -1,12 +1,22 @@
 import _configProvider from '@vamship/config';
-import { args as _argErrors, http as _httpErrors } from '@vamship/error-types';
+import {
+    args as _argErrors,
+    data as _dataErrors,
+    http as _httpErrors
+} from '@vamship/error-types';
 import _loggerProvider from '@vamship/logger';
 
 import _greetingRoutes from './greeting';
 import _healthRoutes from './health';
 import _testRoutes from './test';
 
-const { BadRequestError, NotFoundError, UnauthorizedError, ForbiddenError } = _httpErrors;
+const {
+    BadRequestError,
+    NotFoundError,
+    UnauthorizedError,
+    ForbiddenError
+} = _httpErrors;
+const { DuplicateRecordError, ConcurrencyControlError } = _httpErrors;
 const { SchemaError } = _argErrors;
 const _config = _configProvider.getConfig();
 const _logger = _loggerProvider.getLogger('routes');
@@ -51,6 +61,28 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof NotFoundError) {
                 res.status(404).json({
+                    error: err.message
+                });
+            } else {
+                next(err);
+            }
+        });
+
+        _logger.trace('Setting up concurrency control error handler');
+        app.use((err, req, res, next) => {
+            if (err instanceof ConcurrencyControlError) {
+                res.status(409).json({
+                    error: err.message
+                });
+            } else {
+                next(err);
+            }
+        });
+
+        _logger.trace('Setting up duplicate record error handler');
+        app.use((err, req, res, next) => {
+            if (err instanceof DuplicateRecordError) {
+                res.status(409).json({
                     error: err.message
                 });
             } else {

@@ -54,6 +54,41 @@ describe('[core routes]', () => {
         });
     });
 
+    describe('[Conflict Error Requests]', () => {
+        it('should return a 409 if the handler throws a DuplicateRecordError', () => {
+            const path = _buildRoute('error/duplicaterecord');
+            return request(endpoint)
+                .get(path)
+                .then((res) => {
+                    expect(res.status).to.equal(409);
+                    expect(res.header['content-type']).to.match(
+                        /^application\/json/
+                    );
+                    expect(res.body).to.deep.equal({
+                        error: '[DuplicateRecordError] Duplicate record error'
+                    });
+                    expect(res.error).to.exist;
+                });
+        });
+
+        it('should return a 409 if the handler throws a ConcurrencyControlError', () => {
+            const path = _buildRoute('error/concurrencycontrol');
+            return request(endpoint)
+                .get(path)
+                .then((res) => {
+                    expect(res.status).to.equal(409);
+                    expect(res.header['content-type']).to.match(
+                        /^application\/json/
+                    );
+                    expect(res.body).to.deep.equal({
+                        error:
+                            '[ConcurrencyControlError] Concurrency check failed'
+                    });
+                    expect(res.error).to.exist;
+                });
+        });
+    });
+
     describe('[Unauthorized Requests]', () => {
         it('should return a 401 if the handler throws an UnauthorizedError', () => {
             const path = _buildRoute('error/unauthorized');
@@ -66,6 +101,25 @@ describe('[core routes]', () => {
                     );
                     expect(res.body).to.deep.equal({
                         error: '[UnauthorizedError] Authorization failed'
+                    });
+                    expect(res.error).to.exist;
+                });
+        });
+    });
+
+    describe('[Forbidden Requests]', () => {
+        it('should return a 403 if the handler throws a ForbiddenError', () => {
+            const path = _buildRoute('error/forbidden');
+            return request(endpoint)
+                .get(path)
+                .then((res) => {
+                    expect(res.status).to.equal(401);
+                    expect(res.header['content-type']).to.match(
+                        /^application\/json/
+                    );
+                    expect(res.body).to.deep.equal({
+                        error:
+                            '[ForbiddenError] Access to this resource is forbidden'
                     });
                     expect(res.error).to.exist;
                 });
