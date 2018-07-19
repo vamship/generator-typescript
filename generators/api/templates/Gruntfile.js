@@ -145,13 +145,9 @@ module.exports = function(grunt) {
     PROJECT.version = packageConfig.version || '__UNKNOWN__';
     PROJECT.unscopedName = PROJECT.appName.replace(/^@[^/]*\//, '');
 <% if(dockerCustomRegistry) { -%>
-    PROJECT.dockerRepo = `<%= dockerCustomRegistry %>/${PROJECT.unscopedName}:${
-        PROJECT.version
-    }`;
+    PROJECT.dockerRepo = `<%= dockerCustomRegistry %>/${PROJECT.unscopedName}`;
 <% } else { -%>
-    PROJECT.dockerRepo = `${PROJECT.appName.replace(/^@/, '')}:${
-        PROJECT.version
-    }`;
+    PROJECT.dockerRepo = `${PROJECT.appName.replace(/^@/, '')}`;
 <% } -%>
     PROJECT.dockerTag = `${PROJECT.dockerRepo}:${PROJECT.version}`;
 
