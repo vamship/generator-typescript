@@ -52,7 +52,7 @@ describe('[/greeting routes]', () => {
                         /^application\/json/
                     );
                     const { error } = res.body;
-                    expect(error).to.match(/.*\[SchemaError\].*\name.*/);
+                    expect(error).to.match(/.*\[SchemaError\].*name.*/);
                 });
         });
 

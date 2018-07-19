@@ -113,7 +113,7 @@ describe('[core routes]', () => {
             return request(endpoint)
                 .get(path)
                 .then((res) => {
-                    expect(res.status).to.equal(401);
+                    expect(res.status).to.equal(403);
                     expect(res.header['content-type']).to.match(
                         /^application\/json/
                     );
