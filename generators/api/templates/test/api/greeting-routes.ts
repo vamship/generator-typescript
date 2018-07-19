@@ -37,9 +37,7 @@ describe('[/greeting routes]', () => {
                             /^application\/json/
                         );
                         const { error } = res.body;
-                        expect(error).to.match(
-                            /.*\[SchemaError\].*language.*/
-                        );
+                        expect(error).to.match(/.*\[SchemaError\].*language.*/);
                     });
             });
         });
