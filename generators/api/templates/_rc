@@ -1,8 +1,8 @@
 {
   "default": {
     "app": {
-      "logLevel": "info",
-      "extremeLogging": true,
+      "logLevel": "trace",
+      "extremeLogging": false,
       "defaultPort": 3000,
       "enableTestRoutes": false,
       "paths": {
@@ -13,20 +13,17 @@
   },
   "development": {
     "app": {
-      "logLevel": "trace",
-      "extremeLogging": false
     }
   },
   "test": {
     "app": {
-      "logLevel": "trace",
-      "extremeLogging": false,
       "enableTestRoutes": true
     }
   },
   "production": {
     "app": {
-      "logLevel": "error"
+      "logLevel": "error",
+      "extremeLogging": true,
     }
   }
 }
