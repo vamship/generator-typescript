@@ -13,7 +13,9 @@ module.exports = class extends Generator {
     gatherProjectInfo() {
         const generatorTitle = `${_consts.GENERATOR_NAME} v${_package.version}`;
         this.log(
-            _yosay(`Typescript Project Generators.\n${_chalk.red(generatorTitle)} `)
+            _yosay(
+                `Typescript Project Generators.\n${_chalk.red(generatorTitle)} `
+            )
         );
         this.prompt([
             {
@@ -25,14 +27,17 @@ module.exports = class extends Generator {
             }
         ]).then((answers) => {
             this.log(answers.templateType);
-            if (answers.templateType === 'api server') {
-                this.composeWith(
-                    `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_API}`
-                );
-            } else {
-                this.composeWith(
-                    `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_LIB}`
-                );
+            switch (answers.templateType) {
+                case 'api server':
+                    this.composeWith(
+                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_API}`
+                    );
+                    break;
+                case 'library':
+                    this.composeWith(
+                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_LIB}`
+                    );
+                    break;
             }
         });
     }
