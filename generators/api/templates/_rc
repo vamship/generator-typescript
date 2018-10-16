@@ -12,8 +12,7 @@
     }
   },
   "development": {
-    "app": {
-    }
+    "app": {}
   },
   "test": {
     "app": {
@@ -23,7 +22,7 @@
   "production": {
     "app": {
       "logLevel": "error",
-      "extremeLogging": true,
+      "extremeLogging": true
     }
   }
 }
