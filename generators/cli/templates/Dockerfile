@@ -1,4 +1,5 @@
 FROM node:8.11.3-alpine
+
 ARG APP_NAME
 
 RUN mkdir -p app/logs
@@ -11,5 +12,6 @@ COPY ./package-lock.json app/package-lock.json
 WORKDIR app
 
 ENV NODE_ENV=production
-RUN ["npm", "install"]
-CMD ["npm", "start"]
+RUN ["npm", "install", "-g", "."]
+
+ENTRYPOINT ["<%= projectCliName %>"]

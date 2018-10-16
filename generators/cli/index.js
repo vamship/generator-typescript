@@ -28,20 +28,21 @@ module.exports = class extends Generator {
      */
     createProjectFiles() {
         [
-            // 'package.json',
-            // 'Gruntfile.js',
-            // 'README.md',
-            // '_gitignore',
-            // '_npmignore',
-            // '_projections.json',
-            // 'tslint.json',
-            // 'tsconfig.json',
-            // '_prettierrc',
-            // 'src/index.ts',
-            // 'src/person.ts',
-            // 'test/unit/index-spec.ts',
-            // 'test/unit/person-spec.ts',
-            // 'docs/index.md'
+            'Dockerfile',
+            'package.json',
+            'Gruntfile.js',
+            'README.md',
+            '_gitignore',
+            '_npmignore',
+            '_projections.json',
+            'tslint.json',
+            'tsconfig.json',
+            '_prettierrc',
+
+            'src/commands/version.ts',
+            'test/unit/commands/version-spec.ts',
+
+            'docs/index.md'
         ].forEach((srcFile) => {
             const destFile = (srcFile.indexOf('_') === 0) ?
                                         srcFile.replace('_', '.'): srcFile;
@@ -51,6 +52,18 @@ module.exports = class extends Generator {
                 this.props
             );
         });
+
+        this.fs.copyTpl(
+            this.templatePath('_rc'),
+            this.destinationPath(`.${this.props.projectName}rc`),
+            this.props
+        );
+
+        this.fs.copyTpl(
+            this.templatePath('src/bin/main.ts'),
+            this.destinationPath(`src/bin/${this.props.projectName}.ts`),
+            this.props
+        );
     }
 
     /**
