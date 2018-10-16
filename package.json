@@ -60,7 +60,9 @@
         },
         "ignore": [
             "generators/api/templates/package.json",
-            "generators/api/templates/Gruntfile.js"
+            "generators/api/templates/Gruntfile.js",
+            "generators/cli/templates/package.json",
+            "generators/cli/templates/Gruntfile.js"
         ]
     },
     "eslintConfig": {
