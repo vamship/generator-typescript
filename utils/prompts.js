@@ -1,5 +1,8 @@
 'use strict';
 
+const _semver = require('semver');
+const _consts = require('./constants');
+
 module.exports = {
     /**
      * Prompts a user for project information that is not already known.
@@ -15,6 +18,7 @@ module.exports = {
         const properties = [
             'projectNamespace',
             'projectName',
+            'projectVersion',
             'projectDescription',
             'projectKeywords'
         ];
@@ -49,6 +53,21 @@ module.exports = {
             });
         }
 
+        if (!config.projectVersion || force) {
+            prompts.push({
+                type: 'input',
+                name: 'projectVersion',
+                message: 'Project version?',
+                default: config.projectVersion || '0.0.1',
+                validate: (answer) => {
+                    if (_semver.valid(answer)) {
+                        return 'Please enter a SemVer compatible version string';
+                    }
+                    return true;
+                }
+            });
+        }
+
         if (!config.projectDescription || force) {
             prompts.push({
                 type: 'input',
@@ -65,13 +84,13 @@ module.exports = {
                 message: 'Project keywords (comma separated)?',
                 default: config.projectKeywords || [],
                 filter: (answer) => {
-                    if(answer instanceof Array) {
+                    if (answer instanceof Array) {
                         return answer;
                     }
                     return answer
                         .split(',')
                         .map((keyword) => `${keyword.trim()}`)
-                        .filter(keyword => !!keyword);
+                        .filter((keyword) => !!keyword);
                 }
             });
         }
@@ -112,7 +131,8 @@ module.exports = {
             'authorName',
             'authorEmail',
             'gitUsername',
-            'gitUrl'
+            'gitUrl',
+            'gitDocumentationUrl'
         ];
         const config = {};
         properties.forEach((propName) => {
@@ -171,6 +191,22 @@ module.exports = {
             });
         }
 
+        if (!config.gitDocumentationUrl || force) {
+            prompts.push({
+                type: 'input',
+                name: 'gitDocumentationUrl',
+                message: 'Documentation URL?',
+                default: (answers) => {
+                    if (config.gitDocumentationUrl) {
+                        return config.gitDocumentationUrl;
+                    }
+                    return `https://${
+                        answers.gitUsername
+                    }.github.io/${gen.config.get('projectName')}`;
+                }
+            });
+        }
+
         return gen.prompt(prompts).then((props) => {
             gen.props = gen.props || {};
             properties.forEach((propName) => {
@@ -196,21 +232,32 @@ module.exports = {
      *         is completed.
      */
     getDockerInfo: function(gen, force) {
-        const properties = [
-            'dockerCustomRegistry'
-        ];
+        const properties = ['dockerRequired', 'dockerCustomRegistry'];
         const config = {};
         properties.forEach((propName) => {
             config[propName] = gen.config.get(propName);
         });
 
         const prompts = [];
+        const dockerOptional =
+            gen.config.get('_projectType') === _consts.SUB_GEN_BIN;
+
+        if (!config.dockerRequired || force) {
+            prompts.push({
+                type: 'confirm',
+                name: 'dockerRequired',
+                message: 'Setup to use Docker?',
+                when: dockerOptional,
+                default: true
+            });
+        }
 
         if (!config.dockerCustomRegistry || force) {
             prompts.push({
                 type: 'input',
                 name: 'dockerCustomRegistry',
                 message: 'Docker registry (leave empty for default)?',
+                when: (answers) => !dockerOptional || answers.dockerRequired,
                 default: config.dockerCustomRegistry
             });
         }

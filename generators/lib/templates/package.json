@@ -1,6 +1,6 @@
 {
     "name": "<%= projectNamespacedName %>",
-    "version": "0.0.1",
+    "version": "<%= projectVersion %>",
     "description": "<%= projectDescription %>",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
