@@ -60,7 +60,7 @@ module.exports = {
                 message: 'Project version?',
                 default: config.projectVersion || '0.0.1',
                 validate: (answer) => {
-                    if (_semver.valid(answer)) {
+                    if (!_semver.valid(answer)) {
                         return 'Please enter a SemVer compatible version string';
                     }
                     return true;
