@@ -20,7 +20,8 @@ module.exports = {
             'projectName',
             'projectVersion',
             'projectDescription',
-            'projectKeywords'
+            'projectKeywords',
+            'projectCliName'
         ];
         const config = {};
         properties.forEach((propName) => {
@@ -28,6 +29,8 @@ module.exports = {
         });
 
         const prompts = [];
+        const cliRequired =
+            gen.config.get('_projectType') === _consts.SUB_GEN_CLI;
 
         if (config.projectNamespace === undefined || force) {
             prompts.push({
@@ -50,6 +53,18 @@ module.exports = {
                 name: 'projectName',
                 message: 'Project name?',
                 default: (config.projectName || gen.appname).replace(/\s/g, '-')
+            });
+        }
+
+        if (!config.projectCliName || force) {
+            prompts.push({
+                type: 'input',
+                name: 'projectCliName',
+                message: 'Command name?',
+                when: cliRequired,
+                default: (answers) =>
+                    config.projectCliName ||
+                    answers.projectName.replace(/\.js$/, '')
             });
         }
 
