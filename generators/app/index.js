@@ -22,20 +22,29 @@ module.exports = class extends Generator {
                 type: 'list',
                 name: 'templateType',
                 message: 'What type of project do you want to create?',
-                choices: ['api server', 'library'],
+                choices: [
+                    _consts.SUB_GEN_API,
+                    _consts.SUB_GEN_LIB,
+                    _consts.SUB_GEN_CLI
+                ],
                 default: 'library'
             }
         ]).then((answers) => {
             this.log(answers.templateType);
             switch (answers.templateType) {
-                case 'api server':
+                case _consts.SUB_GEN_API:
                     this.composeWith(
                         `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_API}`
                     );
                     break;
-                case 'library':
+                case _consts.SUB_GEN_LIB:
                     this.composeWith(
                         `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_LIB}`
+                    );
+                    break;
+                case _consts.SUB_GEN_CLI:
+                    this.composeWith(
+                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_CLI}`
                     );
                     break;
             }
