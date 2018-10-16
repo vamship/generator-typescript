@@ -17,7 +17,7 @@ module.exports = class extends Generator {
             `Typescript Library Generator.\n${_chalk.red(generatorTitle)} `
         ));
 
-        this.config.set('_projectType', 'lib');
+        this.config.set('_projectType', _consts.SUB_GEN_LIB);
         return _prompts.getProjectInfo(this, true)
              .then(() => { return _prompts.getAuthorInfo(this, true); });
     }

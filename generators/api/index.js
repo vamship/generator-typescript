@@ -17,7 +17,7 @@ module.exports = class extends Generator {
             `Typescript API Generator.\n${_chalk.red(generatorTitle)} `
         ));
 
-        this.config.set('_projectType', 'api');
+        this.config.set('_projectType', _consts.SUB_GEN_API);
         return _prompts.getProjectInfo(this, true)
             .then(() => { return _prompts.getAuthorInfo(this, true); })
             .then(() => { return _prompts.getDockerInfo(this, true); });
