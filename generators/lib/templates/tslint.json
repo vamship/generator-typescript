@@ -10,6 +10,7 @@
         "no-unused-variable": true,
         "trailing-comma": false,
         "prefer-conditional-expression": false,
-        "object-literal-sort-keys": false
+        "object-literal-sort-keys": false,
+        "object-literal-key-quotes": [ true, "as-needed" ]
     }
 }
