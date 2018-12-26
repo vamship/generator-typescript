@@ -368,7 +368,7 @@ module.exports = function(grunt) {
     /**
      * Documentation task - generates documentation for the project.
      */
-    grunt.registerTask('docs', ['typedoc:default', 'copy:docs']);
+    grunt.registerTask('docs', ['typedoc:default']);
 
     /**
      * Distribution task - prepares files for packaging by building, compiling
