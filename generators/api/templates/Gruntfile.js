@@ -2,6 +2,7 @@
 
 const { Directory } = require('@vamship/grunt-utils');
 const _path = require('path');
+const _camelcase = require('camelcase');
 
 // -------------------------------------------------------------------------------
 //  Help documentation
@@ -262,7 +263,9 @@ module.exports = function(grunt) {
             dockerBuild: {
                 command: `docker build --rm --tag ${
                     PROJECT.dockerTag
-                } ${__dirname} --build-arg APP_NAME=${PROJECT.unscopedName}`
+                } ${__dirname} --build-arg APP_NAME=${
+                    _camelcase(PROJECT.unscopedName)
+                }`
             },
             dockerPublish: {
                 command: `docker push ${PROJECT.dockerTag}`
