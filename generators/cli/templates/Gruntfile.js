@@ -269,7 +269,7 @@ module.exports = function(grunt) {
             dockerBuild: {
                 command: `docker build --rm --tag ${
                     PROJECT.dockerTag
-                } ${__dirname} --build-arg APP_NAME=${ PROJECT.unscopedName }`
+                } ${__dirname} --build-arg APP_NAME=${PROJECT.unscopedName}`
             },
             dockerPublish: {
                 command: `docker push ${PROJECT.dockerTag}`
