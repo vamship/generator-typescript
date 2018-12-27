@@ -8,9 +8,7 @@ import * as _sinon from 'sinon';
 
 import { consoleHelper as _consoleHelper } from '@vamship/test-utils';
 import { Promise } from 'bluebird';
-import * as _fs from 'fs';
-import * as _path from 'path';
-import * as command from '../../../src/commands/version';
+import * as command from '../../../src/commands/hello';
 
 import 'mocha';
 
@@ -53,30 +51,19 @@ describe('version', () => {
             return ret;
         });
 
-        it('should print the version number of the executable', () => {
-            const readFileMethod = Promise.promisify(_fs.readFile.bind(_fs));
+        it('should print a hello message', () => {
             const stub = _sinon.stub(console, 'log');
-            const packageJsonPath = _path.resolve(
-                __dirname,
-                '../../../package.json'
-            );
 
-            return readFileMethod(packageJsonPath)
-                .then((packageData) => {
-                    packageData = JSON.parse(packageData);
+            stub.resetHistory();
+            const ret = _execHandler({}, true);
 
-                    stub.resetHistory();
-                    const ret = _execHandler({}, true);
-
-                    return expect(ret).to.be.fulfilled.then(() => {
-                        return packageData.version;
-                    });
+            return Promise.resolve()
+                .then(() => {
+                    return expect(ret).to.be.fulfilled;
                 })
-                .then((expectedVersion) => {
+                .then(() => {
                     expect(stub).to.have.been.calledOnce;
-                    expect(stub).to.have.been.calledWithExactly(
-                        `v${expectedVersion}`
-                    );
+                    expect(stub).to.have.been.calledWithExactly('Hello!');
                 })
                 .finally(() => {
                     stub.restore();

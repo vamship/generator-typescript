@@ -163,12 +163,6 @@ module.exports = function(grunt) {
          * - Copy files from transpiled (working) to distribution targets
          */
         copy: {
-            build: {
-                expand: false,
-                cwd: PROJECT.path,
-                src: ['package.json', 'README.md'],
-                dest: WORKING.path
-            },
             dist: {
                 expand: true,
                 cwd: WORKING.getChild('src').path,
@@ -409,11 +403,7 @@ module.exports = function(grunt) {
                 docs: ['docs'],
                 lint: ['lint'],
                 unit: ['test:unit'],
-                // Call build first so that package.json is copied and
-                // permissions are set correctly. Note that if package.json
-                // changes or a new binary is added, the monitor needs to be
-                // restarted
-                build: ['build', 'ts:monitor']
+                build: ['ts:monitor']
             };
 
             const tasks = validTasks[target];
@@ -446,7 +436,7 @@ module.exports = function(grunt) {
     /**
      * Build task - Builds typescript files into javascript
      */
-    grunt.registerTask('build', ['ts:default', 'copy:build', 'chmod:working']);
+    grunt.registerTask('build', ['ts:default', 'chmod:working']);
 
     /**
      * Documentation task - generates documentation for the project.

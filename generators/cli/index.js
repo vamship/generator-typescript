@@ -39,8 +39,8 @@ module.exports = class extends Generator {
             'tsconfig.json',
             '_prettierrc',
 
-            'src/commands/version.ts',
-            'test/unit/commands/version-spec.ts',
+            'src/commands/hello.ts',
+            'test/unit/commands/hello-spec.ts',
 
             'docs/index.md'
         ].forEach((srcFile) => {
