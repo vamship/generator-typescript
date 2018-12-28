@@ -10,9 +10,9 @@ LABEL org.label-schema.name=$APP_NAME \
       org.label-schema.build-date=$BUILD_TIMESTAMP \
       org.label-schema.vcs-url="https://<%= gitUrl %>" \
 <% if(dockerCustomRegistry) { -%>
-      org.label-schema.url= "<%= dockerCustomRegistry %>/<%= projectNamespacedName.replace(/^@[^/]*\//, '') %>"
+      org.label-schema.url= "<%= dockerCustomRegistry %>/<%= projectNamespacedName.replace(/^@/, '') %>"
 <% } else { -%>
-      org.label-schema.url="https://hub.docker.com/r/<%= projectNamespacedName.replace(/^@[^/]*\//, '') %>"
+      org.label-schema.url="https://hub.docker.com/r/<%= projectNamespacedName.replace(/^@/, '') %>"
 <% } -%>
 
 RUN mkdir -p app/logs

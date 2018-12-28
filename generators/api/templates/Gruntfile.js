@@ -260,9 +260,11 @@ module.exports = function(grunt) {
             dockerBuild: {
                 command: `docker build --rm --tag ${
                     PROJECT.dockerTag
-                } ${__dirname} --build-arg APP_NAME=${
-                    _camelcase(PROJECT.unscopedName)
-                }`
+                } ${__dirname} --build-arg APP_NAME=${_camelcase(
+                    PROJECT.unscopedName
+                )} --build-arg APP_VERSION=${
+                    PROJECT.version
+                } --build-arg BUILD_TIMESTAMP=${Date.now()}`
             },
             dockerPublish: {
                 command: `docker push ${PROJECT.dockerTag}`
