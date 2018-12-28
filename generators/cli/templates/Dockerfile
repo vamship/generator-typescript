@@ -1,6 +1,19 @@
-FROM node:8.11.3-alpine
+FROM node:8.14.0-alpine
 
 ARG APP_NAME
+ARG BUILD_TIMESTAMP
+ARG APP_VERSION
+
+# Metadata
+LABEL org.label-schema.name=$APP_NAME \
+      org.label-schema.version=$APP_VERSION \
+      org.label-schema.build-date=$BUILD_TIMESTAMP \
+      org.label-schema.vcs-url="https://<%= gitUrl %>" \
+<% if(dockerCustomRegistry) { -%>
+      org.label-schema.url= "<%= dockerCustomRegistry %>/<%= projectNamespacedName.replace(/^@[^/]*\//, '') %>"
+<% } else { -%>
+      org.label-schema.url="https://hub.docker.com/r/<%= projectNamespacedName.replace(/^@[^/]*\//, '') %>"
+<% } -%>
 
 RUN mkdir -p app/logs
 
