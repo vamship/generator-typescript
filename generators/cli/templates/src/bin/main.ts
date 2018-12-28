@@ -2,10 +2,18 @@
 'use strict';
 
 import * as _loggerProvider from '@vamship/logger';
+import * as _configProvider from '@vamship/config';
 import * as _yargs from 'yargs';
 
-_loggerProvider.configure('software-updater', {
-    level: process.env.LOG_LEVEL || 'error'
+const config = _configProvider
+    .configure('<%= projectCamelCasedName %>')
+    .setApplicationScope(process.env.NODE_ENV)
+    .getConfig();
+
+_loggerProvider.configure('<%= projectName %>', {
+    extreme: config.get('log.extremeLogging'),
+    destination: 'process.stderr',
+    level: config.get('log.level')
 });
 const _logger = _loggerProvider.getLogger('main');
 
