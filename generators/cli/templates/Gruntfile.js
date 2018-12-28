@@ -1,6 +1,7 @@
 'use strict';
 
 const { Directory } = require('@vamship/grunt-utils');
+const _camelcase = require('camelcase');
 
 // -------------------------------------------------------------------------------
 //  Help documentation
@@ -35,9 +36,6 @@ const HELP_TEXT =
 '                       The monitor task will only perform one action at a time. \n' +
 '                       If watches need to be executed on multiple targets,      \n' +
 '                       separate `grunt monitor` tasks may be run in parallel.   \n' +
-'                                                                                \n' +
-'                       If a specific task requires a web server to be launched, \n' +
-'                       that will be done automatically.                         \n' +
 '                                                                                \n' +
 '   lint              : Performs linting of all source and test files.           \n' +
 '                                                                                \n' +
@@ -269,7 +267,11 @@ module.exports = function(grunt) {
             dockerBuild: {
                 command: `docker build --rm --tag ${
                     PROJECT.dockerTag
-                } ${__dirname} --build-arg APP_NAME=${PROJECT.unscopedName}`
+                } ${__dirname} --build-arg APP_NAME=${_camelcase(
+                    PROJECT.unscopedName
+                )} --build-arg APP_VERSION=${
+                    PROJECT.version
+                } --build-arg BUILD_TIMESTAMP=${Date.now()}`
             },
             dockerPublish: {
                 command: `docker push ${PROJECT.dockerTag}`
