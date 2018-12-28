@@ -39,8 +39,8 @@ module.exports = class extends Generator {
             'tsconfig.json',
             '_prettierrc',
 
-            'src/commands/hello.ts',
-            'test/unit/commands/hello-spec.ts',
+            'src/commands/greet.ts',
+            'test/unit/commands/greet-spec.ts',
 
             'docs/index.md'
         ].forEach((srcFile) => {
@@ -55,7 +55,7 @@ module.exports = class extends Generator {
 
         this.fs.copyTpl(
             this.templatePath('_rc'),
-            this.destinationPath(`.${this.props.projectName}rc`),
+            this.destinationPath(`.${this.props.projectCamelCasedName}rc`),
             this.props
         );
 

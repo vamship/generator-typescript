@@ -1,10 +1,10 @@
 /**
- * Sub command to show a hello message
+ * Sub command to show a greeting message
  */
 import { Promise } from 'bluebird';
 
-export const command = 'version';
-export const describe = 'Print version number';
+export const command = 'greet';
+export const describe = 'Print greeting message';
 export const builder = {};
 export const handler = (argv) => {
     return new Promise((resolve, reject) => {

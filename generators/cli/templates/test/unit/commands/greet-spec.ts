@@ -8,11 +8,11 @@ import * as _sinon from 'sinon';
 
 import { consoleHelper as _consoleHelper } from '@vamship/test-utils';
 import { Promise } from 'bluebird';
-import * as command from '../../../src/commands/hello';
+import * as command from '../../../src/commands/greet';
 
 import 'mocha';
 
-describe('version', () => {
+describe('greet', () => {
     function _execHandler(args: object, noMute: boolean = false) {
         args = Object.assign({}, args);
 
@@ -30,8 +30,8 @@ describe('version', () => {
 
     describe('[init]', () => {
         it('should export properties required by the command', () => {
-            const expectedCommand = 'version';
-            const expectedDescription = 'Print version number';
+            const expectedCommand = 'greet';
+            const expectedDescription = 'Print greeting message';
             const expectedBuilder = {};
 
             expect(command.command).to.equal(expectedCommand);
@@ -51,7 +51,7 @@ describe('version', () => {
             return ret;
         });
 
-        it('should print a hello message', () => {
+        it('should print a greeting message', () => {
             const stub = _sinon.stub(console, 'log');
 
             stub.resetHistory();
