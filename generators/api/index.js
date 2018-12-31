@@ -93,8 +93,8 @@ module.exports = class extends Generator {
         [
             `                                                                                `,
             `--------------------------------------------------------------------------------`,
-            ` Your Typescript libaray project has been created, and is ready for use. Grunt  `,
-            ` tasks have been provided for common development tasks such as:                 `,
+            ` Your Typescript API project has been created, and is ready for use. Grunt tasks`,
+            ` have been provided for common development tasks such as:                       `,
             `                                                                                `,
             ` Building typescript files:                                                     `,
             `   ${grunt} ${gruntBuildCommand}                                                `,
