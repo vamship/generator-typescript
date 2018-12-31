@@ -4,6 +4,7 @@
     "description": "<%= projectDescription %>",
     "main": "dist/index.js",
     "scripts": {
+        "test": "grunt test:unit",
         "start": "node dist/index.js",
         "prepack": "grunt dist"
     },
