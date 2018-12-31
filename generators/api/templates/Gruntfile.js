@@ -52,6 +52,7 @@ const HELP_TEXT =
 '                                                                                \n' +
 '   docs              : Generates project documentation.                         \n' +
 '                                                                                \n' +
+<% if(dockerRequired) {-%>
 '   build             : Builds the project - generates javascript from           \n' +
 '                       typescript sources.                                      \n' +
 '                                                                                \n' +
@@ -70,6 +71,7 @@ const HELP_TEXT =
 '                       repo when publishing. The image is always tagged and     \n' +
 '                       published with the current project version whether or    \n' +
 '                       not any additional tags are specified.                   \n' +
+<% } -%>
 '                                                                                \n' +
 '   test:[unit|api]   : Executes tests against source files. The type of test    \n' +
 '                       to execute is specified by the first sub target          \n' +
@@ -131,10 +133,10 @@ module.exports = function(grunt) {
         },
         dist: null,
         docs: null,
+        logs: null,
         node_modules: null,
         coverage: null,
-        '.tscache': null,
-        logs: null
+        '.tscache': null
     });
 
     const packageConfig = grunt.file.readJSON('package.json') || {};
@@ -251,6 +253,7 @@ module.exports = function(grunt) {
             }
         },
 
+<% if(dockerRequired) {-%>
         /**
          * Configuration for grunt-shell, which is used to execute:
          * - Build docker images using the docker cli
@@ -280,6 +283,7 @@ module.exports = function(grunt) {
                 }
             }
         },
+<% }-%>
 
         /**
          * Configuration for grunt-typedoc, which can be used to:
@@ -380,28 +384,28 @@ module.exports = function(grunt) {
     /**
      * Test task - executes lambda tests against code in dev only.
      */
-    grunt.registerTask('test', 'Executes tests against sources', (target) => {
-        target = target || 'unit';
+    grunt.registerTask('test', 'Executes tests against sources', (testType) => {
+        testType = testType || 'unit';
         const validTasks = {
-            unit: [`mocha_istanbul:${target}`],
-            api: [`mocha_istanbul:${target}`]
+            unit: [`mocha_istanbul:${testType}`],
+            api: [`mocha_istanbul:${testType}`]
         };
-        const requireServer = target === 'api' && !grunt.option('no-server');
+        const requireServer = testType === 'api' && !grunt.option('no-server');
 
-        const tasks = validTasks[target];
-        if (['unit', 'api'].indexOf(target) >= 0) {
+        const tasks = validTasks[testType];
+        if (['unit', 'api'].indexOf(testType) >= 0) {
             let testSuite = grunt.option('test-suite');
             if (typeof testSuite === 'string' && testSuite.length > 0) {
                 if (!testSuite.endsWith('.js')) {
                     grunt.log.warn('Adding .js suffix to test suite');
                     testSuite = testSuite + '.js';
                 }
-                const path = WORKING.getChild(`test/${target}`).getFilePath(
+                const path = WORKING.getChild(`test/${testType}`).getFilePath(
                     testSuite
                 );
                 grunt.log.writeln(`Running test suite: [${testSuite}]`);
                 grunt.log.writeln(`Tests will be limited to: [${path}]`);
-                grunt.config.set(`mocha_istanbul.${target}`, path);
+                grunt.config.set(`mocha_istanbul.${testType}`, path);
             }
         }
 
@@ -413,7 +417,7 @@ module.exports = function(grunt) {
             }
             grunt.task.run(tasks);
         } else {
-            grunt.log.error(`Unrecognized test type: [${target}]`);
+            grunt.log.error(`Unrecognized test type: [${testType}]`);
             grunt.log.warn('Type "grunt help" for help documentation');
         }
     });
