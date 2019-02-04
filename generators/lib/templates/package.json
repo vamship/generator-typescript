@@ -9,7 +9,7 @@
     },
     "keywords": <%- JSON.stringify(projectKeywords) %>,
     "author": "<%= authorName %> <<%= authorEmail %>>",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@types/chai": "^4.1.7",
         "@types/chai-as-promised": "^7.1.0",
