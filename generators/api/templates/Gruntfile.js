@@ -136,6 +136,7 @@ module.exports = function(grunt) {
         logs: null,
         node_modules: null,
         coverage: null,
+        '.nyc_output': null,
         '.tscache': null
     });
 
@@ -160,6 +161,7 @@ module.exports = function(grunt) {
     const NODE_MODULES = PROJECT.getChild('node_modules');
     const COVERAGE = PROJECT.getChild('coverage');
     const TSCACHE = PROJECT.getChild('.tscache');
+    const NYC = PROJECT.getChild('.nyc_output');
     const LOGS = PROJECT.getChild('logs');
 
     /* ------------------------------------------------------------------------
@@ -186,25 +188,12 @@ module.exports = function(grunt) {
         clean: {
             coverage: [COVERAGE.path],
             tscache: [TSCACHE.path],
+            nyc: [NYC.path],
             logs: [LOGS.getAllFilesPattern('log')],
             ctags: [PROJECT.getFilePath('tags')],
             dist: [DIST.path],
             working: [WORKING.path],
             temp: [PROJECT.getFilePath('tscommand-*.tmp.txt')]
-        },
-
-        /**
-         * Configuration for grunt-mocha-istanbul, which is used to:
-         *  - Execute server side node.js tests, with code coverage
-         */
-        mocha_istanbul: {
-            options: {
-                reportFormats: ['text-summary', 'html'],
-                reporter: 'spec',
-                colors: true
-            },
-            unit: [WORKING.getChild('test/unit').getAllFilesPattern('js')],
-            api: [WORKING.getChild('test/api').getAllFilesPattern('js')]
         },
 
         /**
@@ -258,6 +247,7 @@ module.exports = function(grunt) {
          * Configuration for grunt-shell, which is used to execute:
          * - Build docker images using the docker cli
          * - Publish docker images to ECR
+         * - Run mocha tests with code coverage
          */
         shell: {
             dockerBuild: {
@@ -280,6 +270,15 @@ module.exports = function(grunt) {
                         `docker tag ${PROJECT.dockerTag} ${targetTag}`,
                         `docker push ${targetTag}`
                     ].join('&&');
+                }
+            },
+            test: {
+                command: () => {
+                    return [
+                        'nyc --reporter text-summary --reporter html ',
+                        'mocha --color -R spec --recursive ',
+                        '<%= shell.test.__path %>'
+                    ].join(' ');
                 }
             }
         },
@@ -386,30 +385,32 @@ module.exports = function(grunt) {
      */
     grunt.registerTask('test', 'Executes tests against sources', (testType) => {
         testType = testType || 'unit';
-        const validTasks = {
-            unit: [`mocha_istanbul:${testType}`],
-            api: [`mocha_istanbul:${testType}`]
-        };
         const requireServer = testType === 'api' && !grunt.option('no-server');
 
-        const tasks = validTasks[testType];
+        const tasks = [];
         if (['unit', 'api'].indexOf(testType) >= 0) {
             let testSuite = grunt.option('test-suite');
+            let testTarget = WORKING.getChild(`test/${testType}`);
+
             if (typeof testSuite === 'string' && testSuite.length > 0) {
                 if (!testSuite.endsWith('.js')) {
                     grunt.log.warn('Adding .js suffix to test suite');
-                    testSuite = testSuite + '.js';
+                    testSuite = `${testSuite}.js`;
                 }
-                const path = WORKING.getChild(`test/${testType}`).getFilePath(
-                    testSuite
-                );
+                testTarget = testTarget.getFilePath(testSuite);
+
                 grunt.log.writeln(`Running test suite: [${testSuite}]`);
-                grunt.log.writeln(`Tests will be limited to: [${path}]`);
-                grunt.config.set(`mocha_istanbul.${testType}`, path);
+                grunt.log.writeln(`Tests will be limited to: [${testTarget}]`);
+            } else {
+                testTarget = testTarget.absolutePath;
+                grunt.log.writeln(`Running all tests of type: [${testType}]`);
             }
+
+            grunt.config.set('shell.test.__path', testTarget);
+            tasks.push('shell:test');
         }
 
-        if (tasks) {
+        if (tasks.length > 0) {
             grunt.task.run('_ensureBuild');
             if (requireServer) {
                 tasks.unshift('express:test');
