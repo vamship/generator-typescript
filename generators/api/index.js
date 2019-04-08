@@ -50,9 +50,9 @@ module.exports = class extends Generator {
             'src/routes/test/index.ts',
 
             'test/utils/api-utils.ts',
-            'test/api/core-routes.ts',
-            'test/api/greeting-routes.ts',
-            'test/api/health-routes.ts',
+            'test/e2e/core-routes.ts',
+            'test/e2e/greeting-routes.ts',
+            'test/e2e/health-routes.ts',
 
             'test/unit/handlers/greeting-handler-spec.ts',
 
