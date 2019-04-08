@@ -212,7 +212,7 @@ module.exports = function(grunt) {
                     return [
                         'nyc --reporter text-summary --reporter html ',
                         'mocha --color -R spec --recursive ',
-                        '<%= shell.test.__path %>'
+                        '<%%= shell.test.__path %%>'
                     ].join(' ');
                 }
             }
