@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-import * as _loggerProvider from '@vamship/logger';
 import * as _configProvider from '@vamship/config';
+import * as _loggerProvider from '@vamship/logger';
 import * as _yargs from 'yargs';
 
 const config = _configProvider
