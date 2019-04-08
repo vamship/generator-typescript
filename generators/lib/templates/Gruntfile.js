@@ -203,6 +203,22 @@ module.exports = function(grunt) {
         },
 
         /**
+         * Configuration for grunt-shell, which is used to execute:
+         * - Run mocha tests with code coverage
+         */
+        shell: {
+            test: {
+                command: () => {
+                    return [
+                        'nyc --reporter text-summary --reporter html ',
+                        'mocha --color -R spec --recursive ',
+                        '<%= shell.test.__path %>'
+                    ].join(' ');
+                }
+            }
+        },
+
+        /**
          * Configuration for grunt-typedoc, which can be used to:
          *  - Generate code documentation.
          */
