@@ -27,7 +27,7 @@ const HELP_TEXT =
 '                                    against all source files.                   \n' +
 '                        [unit]    : Executes unit tests against all source      \n' +
 '                                    files.                                      \n' +
-'                         [api]    : Executes http request test against server   \n' +
+'                         [e2e]    : Executes http request test against server   \n' +
 '                                    routes. This task will automatically launch \n' +
 '                                    the web server prior to running the tests,  \n' +
 '                                    and shutdown the server after the tests have\n' +
@@ -73,9 +73,9 @@ const HELP_TEXT =
 '                       not any additional tags are specified.                   \n' +
 <% } -%>
 '                                                                                \n' +
-'   test:[unit|api]   : Executes tests against source files. The type of test    \n' +
+'   test:[unit|e2e]   : Executes tests against source files. The type of test    \n' +
 '                       to execute is specified by the first sub target          \n' +
-'                       (unit/api).                                              \n' +
+'                       (unit/e2e).                                              \n' +
 '                       If required by the tests, an instance of express will be \n' +
 '                       started prior to executing the tests.                    \n' +
 '                                                                                \n' +
@@ -122,13 +122,13 @@ module.exports = function(grunt) {
         src: null,
         test: {
             unit: null,
-            api: null
+            e2e: null
         },
         working: {
             src: null,
             test: {
                 unit: null,
-                api: null
+                e2e: null
             }
         },
         dist: null,
@@ -385,10 +385,10 @@ module.exports = function(grunt) {
      */
     grunt.registerTask('test', 'Executes tests against sources', (testType) => {
         testType = testType || 'unit';
-        const requireServer = testType === 'api' && !grunt.option('no-server');
+        const requireServer = testType === 'e2e' && !grunt.option('no-server');
 
         const tasks = [];
-        if (['unit', 'api'].indexOf(testType) >= 0) {
+        if (['unit', 'e2e'].indexOf(testType) >= 0) {
             let testSuite = grunt.option('test-suite');
             let testTarget = WORKING.getChild(`test/${testType}`);
 
@@ -437,7 +437,7 @@ module.exports = function(grunt) {
                 docs: ['docs'],
                 lint: ['lint'],
                 unit: ['test:unit'],
-                api: ['test:api'],
+                e2e: ['test:e2e'],
                 build: ['ts:monitor'],
                 server: ['express:monitor', 'monitor:server']
             };
@@ -495,7 +495,7 @@ module.exports = function(grunt) {
         'lint',
         'build',
         'test:unit',
-        'test:api',
+        'test:e2e',
         'copy:dist'
     ]);
 
@@ -529,7 +529,7 @@ module.exports = function(grunt) {
         'lint',
         'build',
         'test:unit',
-        'test:api',
+        'test:e2e',
         'clean'
     ]);
 
