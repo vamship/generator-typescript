@@ -1,6 +1,6 @@
 {
     "name": "@vamship/generator-typescript",
-    "version": "2.8.2",
+    "version": "2.9.0",
     "description": "Yeoman generator for typescript projects",
     "homepage": "",
     "author": {
