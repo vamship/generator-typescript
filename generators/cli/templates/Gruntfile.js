@@ -130,6 +130,7 @@ module.exports = function(grunt) {
 
     PROJECT.appName = packageConfig.name || '__UNKNOWN__';
     PROJECT.version = packageConfig.version || '__UNKNOWN__';
+    PROJECT.description = packageConfig.description || '';
 <% if(dockerRequired) {-%>
     PROJECT.unscopedName = PROJECT.appName.replace(/^@[^/]*\//, '');
 <%     if(dockerCustomRegistry) { -%>
@@ -257,6 +258,8 @@ module.exports = function(grunt) {
                     PROJECT.dockerTag
                 } ${__dirname} --build-arg APP_NAME=${_camelcase(
                     PROJECT.unscopedName
+                )} --build-arg APP_DESCRIPTION=${
+                    PROJECT.description
                 )} --build-arg APP_VERSION=${
                     PROJECT.version
                 } --build-arg BUILD_TIMESTAMP=${Date.now()}`
