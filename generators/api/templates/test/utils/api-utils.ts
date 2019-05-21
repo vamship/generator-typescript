@@ -1,7 +1,7 @@
 import _configProvider from '@vamship/config';
 
 const _config = _configProvider
-    .configure('<%= projectName %>')
+    .configure('<%= projectCamelCasedName %>')
     .setApplicationScope('test')
     .getConfig();
 

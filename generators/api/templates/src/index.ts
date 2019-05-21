@@ -6,7 +6,7 @@ import loggerProvider from '@vamship/logger';
 import express from 'express';
 
 const config = configProvider
-    .configure('<%= projectName %>')
+    .configure('<%= projectCamelCasedName %>')
     .setApplicationScope(process.env.NODE_ENV)
     .getConfig();
 

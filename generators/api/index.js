@@ -82,7 +82,7 @@ module.exports = class extends Generator {
 
         this.fs.copyTpl(
             this.templatePath('_rc'),
-            this.destinationPath(`.${this.props.projectName}rc`),
+            this.destinationPath(`.${this.props.projectCamelCasedName}rc`),
             this.props
         );
     }
