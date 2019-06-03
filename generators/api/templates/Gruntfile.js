@@ -280,7 +280,7 @@ module.exports = function(grunt) {
             test: {
                 command: () => {
                     return [
-                        'nyc --reporter text-summary --reporter html ',
+                        'nyc --reporter text-summary --reporter html --extension .ts ',
                         'mocha --color -R spec --recursive ',
                         '<%%= shell.test.__path %%>'
                     ].join(' ');
