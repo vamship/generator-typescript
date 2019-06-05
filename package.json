@@ -1,6 +1,6 @@
 {
     "name": "@vamship/generator-typescript",
-    "version": "2.13.1",
+    "version": "2.14.1",
     "description": "Yeoman generator for typescript projects",
     "homepage": "",
     "author": {
@@ -8,6 +8,12 @@
         "email": "vamshi.ponnapalli@gmail.com",
         "url": ""
     },
+    "contributors": [
+        {
+            "name": "Onaje K Baxley",
+            "email": "onaje.baxley@gmail.com"
+        }
+    ],
     "files": [
         "generators",
         "utils"
@@ -63,7 +69,9 @@
             "generators/cli/templates/package.json",
             "generators/cli/templates/Gruntfile.js",
             "generators/lib/templates/package.json",
-            "generators/lib/templates/Gruntfile.js"
+            "generators/lib/templates/Gruntfile.js",
+            "generators/pipeline/templates/package.json",
+            "generators/pipeline/templates/Gruntfile.js"
         ]
     },
     "eslintConfig": {

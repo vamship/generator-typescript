@@ -4,5 +4,6 @@
     "GENERATOR_NAME": "@vamship/typescript",
     "SUB_GEN_LIB": "lib",
     "SUB_GEN_CLI": "cli",
-    "SUB_GEN_API": "api"
+    "SUB_GEN_API": "api",
+    "SUB_GEN_PIPELINE": "pipeline"
 }
