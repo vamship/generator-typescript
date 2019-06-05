@@ -1,6 +1,6 @@
 {
     "name": "@vamship/generator-typescript",
-    "version": "2.13.0",
+    "version": "2.14.0",
     "description": "Yeoman generator for typescript projects",
     "homepage": "",
     "author": {
@@ -8,6 +8,12 @@
         "email": "vamshi.ponnapalli@gmail.com",
         "url": ""
     },
+    "contributors": [
+        {
+            "name": "Onaje K Baxley",
+            "email": "onaje.baxley@gmail.com"
+        }
+    ],
     "files": [
         "generators",
         "utils"

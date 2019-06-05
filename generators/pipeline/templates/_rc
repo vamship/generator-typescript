@@ -1,0 +1,45 @@
+{
+  "default": {
+    "hostname": "localhost",
+    "port": 15672,
+    "username": "user",
+    "password": "password",
+    "log": {
+      "level": "trace",
+      "extremeLogging": false
+    },
+    "pipeline": {
+      "input": {
+        "exchange": {
+          "name": "inputExchange",
+          "type": "fanout",
+          "topic": "",
+          "durable": "true"
+        },
+        "queue": {
+          "name": "inputQueue",
+          "durable": "true"
+        }
+      },
+      "output": {
+        "exchange": {
+          "name": "outputExchange",
+          "type": "fanout",
+          "durable": "true"
+        }
+      }
+    }
+  },
+  "development": {
+    "pipeline": {}
+  },
+  "test": {
+    "pipeline": {}
+  },
+  "production": {
+    "log": {
+      "level": "info",
+      "extremeLogging": true
+    }
+  }
+}
