@@ -258,7 +258,7 @@ module.exports = function(grunt) {
                     PROJECT.unscopedName
                 } --build-arg APP_DESCRIPTION='${
                     PROJECT.description
-                }' --build-arg APP_VERSION=${
+                }' --build-arg APP_VERSION='${
                     PROJECT.version
                 }' --build-arg CONFIG_NAME=${_camelcase(
                     PROJECT.unscopedName
