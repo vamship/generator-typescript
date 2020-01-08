@@ -1,0 +1,6 @@
+generators/api/templates/package.json
+generators/api/templates/Gruntfile.js
+generators/cli/templates/package.json
+generators/cli/templates/Gruntfile.js
+generators/lib/templates/package.json
+generators/lib/templates/Gruntfile.js

@@ -8,15 +8,9 @@
         "email": "vamshi.ponnapalli@gmail.com",
         "url": ""
     },
-    "files": [
-        "generators",
-        "utils"
-    ],
+    "files": ["generators", "utils"],
     "main": "generators/index.js",
-    "keywords": [
-        "typescript",
-        "yeoman-generator"
-    ],
+    "keywords": ["typescript", "yeoman-generator"],
     "devDependencies": {
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.9.0",
@@ -44,33 +38,14 @@
     },
     "scripts": {
         "pretest": "eslint .",
-        "precommit": "lint-staged",
         "test": "jest"
     },
     "lint-staged": {
-        "linters": {
-            "*.js": [
-                "eslint --fix",
-                "git add"
-            ],
-            "*.json": [
-                "git add"
-            ]
-        },
-        "ignore": [
-            "generators/api/templates/package.json",
-            "generators/api/templates/Gruntfile.js",
-            "generators/cli/templates/package.json",
-            "generators/cli/templates/Gruntfile.js",
-            "generators/lib/templates/package.json",
-            "generators/lib/templates/Gruntfile.js"
-        ]
+        "*.js": ["eslint --fix", "git add"],
+        "*.json": ["git add"]
     },
     "eslintConfig": {
-        "extends": [
-            "xo",
-            "prettier"
-        ],
+        "extends": ["xo", "prettier"],
         "env": {
             "jest": true,
             "node": true
@@ -84,10 +59,13 @@
                 }
             ]
         },
-        "plugins": [
-            "prettier"
-        ]
+        "plugins": ["prettier"]
     },
     "repository": "https://github.com/vamship/generator-typescript",
-    "license": "MIT"
+    "license": "MIT",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    }
 }
