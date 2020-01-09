@@ -1,8 +1,9 @@
 {
     "extends": ["eslint:recommended"],
     "plugins": [],
+    "ignorePatterns": [ "generators/**/templates/package.json"],
     "parserOptions": {
-        "ecmaVersion": 5,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {

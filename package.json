@@ -44,24 +44,6 @@
         "*.js": ["eslint --fix", "git add"],
         "*.json": ["git add"]
     },
-    "eslintConfig": {
-        "extends": ["xo", "prettier"],
-        "env": {
-            "jest": true,
-            "node": true
-        },
-        "ignorePatterns": [ "generators/**/templates/package.json"],
-        "rules": {
-            "prettier/prettier": [
-                "error",
-                {
-                    "singleQuote": true,
-                    "printWidth": 90
-                }
-            ]
-        },
-        "plugins": ["prettier"]
-    },
     "repository": "https://github.com/vamship/generator-typescript",
     "license": "MIT",
     "husky": {
