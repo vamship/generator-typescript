@@ -10,7 +10,6 @@
         "prepack": "gulp --series clean format lint build test-unit"
     },
     "keywords": <%- JSON.stringify(projectKeywords) %>,
-
     "author": "<%= authorName %> <<%= authorEmail %>>",
     "license": "MIT",
     "devDependencies": {
