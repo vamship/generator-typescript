@@ -59,4 +59,17 @@
         "url": "https://<%= gitUrl %>/issues"
     },
     "homepage": "https://<%= gitUrl %>#readme"
+    "buildMetadata": {
+        "projectType": "cli",
+        "language": "ts",
+<% if(dockerRequired) {-%>
+        "docker": {
+<%   if(dockerRepo) {-%>
+            "repo": "<%= dockerRepo %>"
+<%   } else if(dockerRegistry) {{-%>
+            "registry": "<%= dockerRegistry %>"
+<%   } -%>
+        }
+<% } -%>
+    }
 }
