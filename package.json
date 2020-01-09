@@ -8,14 +8,17 @@
         "email": "vamshi.ponnapalli@gmail.com",
         "url": ""
     },
-    "files": ["generators", "utils"],
+    "files": [
+        "generators",
+        "utils"
+    ],
     "main": "generators/index.js",
-    "keywords": ["typescript", "yeoman-generator"],
+    "keywords": [
+        "typescript",
+        "yeoman-generator"
+    ],
     "devDependencies": {
         "eslint": "^6.8.0",
-        "eslint-config-prettier": "^6.9.0",
-        "eslint-config-xo": "^0.27.2",
-        "eslint-plugin-prettier": "^3.1.2",
         "husky": "^4.0.1",
         "jest": "^24.9.0",
         "lint-staged": "^9.5.0",
@@ -41,8 +44,13 @@
         "test": "jest"
     },
     "lint-staged": {
-        "*.js": ["eslint --fix", "git add"],
-        "*.json": ["git add"]
+        "*.js": [
+            "eslint --fix",
+            "git add"
+        ],
+        "*.json": [
+            "git add"
+        ]
     },
     "repository": "https://github.com/vamship/generator-typescript",
     "license": "MIT",
