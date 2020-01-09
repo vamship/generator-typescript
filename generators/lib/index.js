@@ -37,7 +37,7 @@ module.exports = class extends Generator {
             '_gitignore',
             '_npmignore',
             '_projections.json',
-            'tslint.json',
+            '_eslintrc.js',
             'tsconfig.json',
             '_prettierrc',
             'src/index.ts',

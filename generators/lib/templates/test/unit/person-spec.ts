@@ -6,7 +6,7 @@ import { testValues as _testValues } from '@vamship/test-utils';
 import Person from '../../src/person';
 
 describe('Person', () => {
-    function _createInstance(firstName?: string, lastName?: string) {
+    function _createInstance(firstName?: string, lastName?: string): Person {
         const fName: string = firstName || _testValues.getString('firstName');
         const lName: string = lastName || _testValues.getString('lastName');
         return new Person(fName, lName);
@@ -15,7 +15,7 @@ describe('Person', () => {
     describe('ctor()', () => {
         it('should throw an error if invoked without a valid firstName', () => {
             const message = 'firstName cannot be empty (arg #1)';
-            const wrapper = () => {
+            const wrapper = (): Person => {
                 const lastName = _testValues.getString('lastName');
                 return new Person('', lastName);
             };
@@ -25,7 +25,7 @@ describe('Person', () => {
 
         it('should throw an error if invoked without a valid lastName', () => {
             const message = 'lastName cannot be empty (arg #2)';
-            const wrapper = () => {
+            const wrapper = (): Person => {
                 const firstName = _testValues.getString('firstName');
                 return new Person(firstName, '');
             };
