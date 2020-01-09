@@ -39,10 +39,6 @@
     "dependencies": {
         "ajv": "^6.10.2"
     },
-    "buildMetadata": {
-        "projectType": "lib",
-        "language": "ts"
-    },
     "repository": {
         "type": "git",
         "url": "https://<%= gitUrl %>.git"
@@ -50,5 +46,9 @@
     "bugs": {
         "url": "https://<%= gitUrl %>/issues"
     },
-    "homepage": "https://<%= gitUrl %>#readme"
+    "homepage": "https://<%= gitUrl %>#readme",
+    "buildMetadata": {
+        "projectType": "lib",
+        "language": "ts"
+    }
 }
