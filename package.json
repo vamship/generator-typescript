@@ -50,6 +50,7 @@
             "jest": true,
             "node": true
         },
+        "ignorePatterns": [ "generators/**/templates/package.json"],
         "rules": {
             "prettier/prettier": [
                 "error",
