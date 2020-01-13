@@ -18,7 +18,7 @@
         "@types/mocha": "^5.2.7",
         "@types/sinon-chai": "^3.2.3",
         "@vamship/arg-utils": "^2.4.3",
-        "@vamship/build-utils": "0.0.14",
+        "@vamship/build-utils": "0.0.16",
         "@vamship/error-types": "^1.7.4",
         "@vamship/test-utils": "^2.4.6",
         "ansi-colors": "^4.1.1",
