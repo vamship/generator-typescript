@@ -13,7 +13,7 @@ import * as command from '../../../src/commands/greet';
 import 'mocha';
 
 describe('greet', () => {
-    function _execHandler(args: object, noMute: boolean = false) {
+    function _execHandler(args: object, noMute = false): Promise<void> {
         args = Object.assign({}, args);
 
         if (!noMute) {
