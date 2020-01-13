@@ -10,8 +10,8 @@
         "test": "gulp test-unit",
         "prepack": "gulp --series clean format lint build test-unit"
     },
-    "keywords": <%- JSON.stringify(projectKeywords) %>,
     "author": "<%= authorName %> <<%= authorEmail %>>",
+    "keywords": <%- JSON.stringify(projectKeywords) %>,
     "license": "MIT",
     "devDependencies": {
         "@types/chai": "^4.2.7",
@@ -19,14 +19,15 @@
         "@types/mocha": "^5.2.7",
         "@types/node": "^13.1.6",
         "@types/sinon-chai": "^3.2.3",
-        "@vamship/arg-utils": "^2.4.3",
-        "@vamship/build-utils": "0.0.16",
-        "@vamship/error-types": "^1.7.4",
-        "@vamship/test-utils": "^2.4.6",
+        "@vamship/arg-utils": "^2.4.4",
+        "@vamship/build-utils": "0.0.17",
+        "@vamship/error-types": "^1.7.6",
+        "@vamship/test-utils": "^2.4.7",
         "ansi-colors": "^4.1.1",
         "chai": "^4.2.0",
         "chai-as-promised": "^7.1.1",
         "gulp": "^4.0.2",
+        "gulp-typedoc": "^2.2.4",
         "mocha": "^7.0.0",
         "nyc": "^15.0.0",
         "rewire": "^4.0.1",
@@ -39,8 +40,8 @@
         "typescript": "^3.7.4"
     },
     "dependencies": {
-        "@vamship/config": "^1.4.3",
-        "@vamship/logger": "^4.2.3",
+        "@vamship/config": "^1.4.4",
+        "@vamship/logger": "^4.2.4",
         "bluebird": "^3.7.2",
         "yargs": "^15.1.0"
     },
