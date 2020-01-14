@@ -28,6 +28,6 @@ COPY package-lock.json app/package-lock.json
 WORKDIR app
 
 ENV NODE_ENV=production
-RUN ["npm", "install", "-g", "."]
+RUN ["npm", "install"]
 
 CMD ["npm", "start"]

@@ -6,7 +6,6 @@
     "scripts": {
         "all": "gulp --series format lint build test-unit clean",
         "test": "gulp test-unit",
-        "prepack": "gulp --series clean format lint build test-unit",
         "start": "node src/index"
     },
     "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
