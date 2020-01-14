@@ -1,9 +1,9 @@
-FROM node:10.15.3-alpine
+FROM node:13.6-alpine
 
 ARG APP_NAME
 ARG APP_DESCRIPTION
 ARG APP_VERSION
-ARG CONFIG_NAME
+ARG CONFIG_FILE_NAME
 ARG BUILD_TIMESTAMP
 
 # Metadata
@@ -20,10 +20,10 @@ LABEL org.label-schema.name=$APP_NAME \
 
 RUN mkdir -p app/logs
 
-COPY ./dist app/dist
-COPY ./.${CONFIG_NAME}rc app/.${CONFIG_NAME}rc
-COPY ./package.json app/package.json
-COPY ./package-lock.json app/package-lock.json
+COPY working app/
+COPY ${CONFIG_FILE_NAME} app/${CONFIG_FILE_NAME}
+COPY package.json app/package.json
+COPY package-lock.json app/package-lock.json
 
 WORKDIR app
 
