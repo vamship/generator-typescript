@@ -20,7 +20,7 @@ LABEL org.label-schema.name=$APP_NAME \
 
 RUN mkdir -p app/logs
 
-COPY working app/
+COPY src app/src
 COPY ${CONFIG_FILE_NAME} app/${CONFIG_FILE_NAME}
 COPY package.json app/package.json
 COPY package-lock.json app/package-lock.json
