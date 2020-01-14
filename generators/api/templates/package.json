@@ -6,7 +6,8 @@
     "scripts": {
         "all": "gulp --series format lint build test-unit clean",
         "test": "gulp test-unit",
-        "prepack": "gulp --series clean format lint build test-unit"
+        "prepack": "gulp --series clean format lint build test-unit",
+        "start": "node src/index"
     },
     "keywords": <%- JSON.stringify(projectKeywords) %>,
     "author": "<%= authorName %> <<%= authorEmail %>>",
@@ -17,9 +18,7 @@
         "@types/express": "^4.17.2",
         "@types/mocha": "^5.2.7",
         "@types/sinon-chai": "^3.2.3",
-        "@vamship/arg-utils": "^2.4.5",
         "@vamship/build-utils": "0.1.1",
-        "@vamship/error-types": "^1.7.7",
         "@vamship/test-utils": "^2.4.8",
         "ansi-colors": "^4.1.1",
         "chai": "^4.2.0",
