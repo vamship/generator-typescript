@@ -41,11 +41,10 @@
         "@vamship/arg-utils": "^2.4.5",
         "@vamship/config": "^1.4.5",
         "@vamship/error-types": "^1.7.7",
-        "@vamship/expressjs-routes": "^1.5.7",
+        "@vamship/expressjs-routes": "^1.6.0",
         "@vamship/logger": "^4.2.5",
         "ajv": "^6.10.2",
         "bluebird": "^3.7.2",
-        "dot-prop": "^5.2.0",
         "express": "^4.17.1"
     },
     "repository": {
