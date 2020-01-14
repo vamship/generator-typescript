@@ -3,14 +3,14 @@
     "version": "<%= projectVersion %>",
     "description": "<%= projectDescription %>",
     "bin": {
-        "<%= projectCliName %>": "dist/bin/<%= projectName %>.js"
+        "<%= projectCliName %>": "bin/<%= projectName %>.js"
     },
     "scripts": {
         "all": "gulp --series format lint build test-unit clean",
         "test": "gulp test-unit",
         "prepack": "gulp --series clean format lint build test-unit"
     },
-    "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
+    "files": [ "package.json", "LICENSE", "README.md", "src/**/*", "bin/**/*" ],
     "author": "<%= authorName %> <<%= authorEmail %>>",
     "keywords": <%- JSON.stringify(projectKeywords) %>,
     "license": "MIT",
