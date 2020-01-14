@@ -3,7 +3,7 @@
     "version": "<%= projectVersion %>",
     "description": "<%= projectDescription %>",
     "bin": {
-        "<%= projectCliName %>": "bin/<%= projectName %>.js"
+        "<%= projectCliName %>": "src/bin/<%= projectName %>.js"
     },
     "scripts": {
         "all": "gulp --series format lint build test-unit clean",
