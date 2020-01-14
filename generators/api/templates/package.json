@@ -9,6 +9,7 @@
         "prepack": "gulp --series clean format lint build test-unit",
         "start": "node src/index"
     },
+    "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
     "keywords": <%- JSON.stringify(projectKeywords) %>,
     "author": "<%= authorName %> <<%= authorEmail %>>",
     "license": "MIT",

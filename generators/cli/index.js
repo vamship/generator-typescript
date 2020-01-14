@@ -39,7 +39,6 @@ module.exports = class extends Generator {
             'README.md',
             'LICENSE',
             '_gitignore',
-            '_npmignore',
             '_projections.json',
             '_eslintrc.js',
             'tsconfig.json',

@@ -10,6 +10,7 @@
         "test": "gulp test-unit",
         "prepack": "gulp --series clean format lint build test-unit"
     },
+    "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
     "author": "<%= authorName %> <<%= authorEmail %>>",
     "keywords": <%- JSON.stringify(projectKeywords) %>,
     "license": "MIT",
