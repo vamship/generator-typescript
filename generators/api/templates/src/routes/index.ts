@@ -25,7 +25,7 @@ const _logger = _loggerProvider.getLogger('routes');
  * @module routes
  */
 export default {
-    setup: (app) => {
+    setup: (app): void => {
         // ----------  Routers ----------
         if (_config.get('app.enableTestRoutes')) {
             _logger.warn('Mounting test routes. Not intended for production!');

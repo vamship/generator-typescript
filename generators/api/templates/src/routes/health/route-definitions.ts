@@ -1,17 +1,18 @@
 import { IRouteDefinition } from '@vamship/expressjs-routes';
+import IHealthResponse from './health-response';
 
 const routeDefinitions: IRouteDefinition[] = [
     {
         method: 'GET',
         path: '/',
-        handler: () => ({ status: 'ok' }),
-        inputMapper: () => ({})
+        handler: (): IHealthResponse => ({ status: 'ok' }),
+        inputMapper: (): {} => ({})
     },
     {
         method: 'GET',
         path: '/ready',
-        handler: () => ({ status: 'ok' }),
-        inputMapper: () => ({})
+        handler: (): IHealthResponse => ({ status: 'ok' }),
+        inputMapper: (): {} => ({})
     }
 ];
 

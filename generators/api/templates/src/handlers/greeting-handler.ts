@@ -24,7 +24,7 @@ const greetingHandler: RequestHandler = (
     ext: IExtendedProperties
 ) => {
     const { name, language } = input;
-    const greeting = GREETINGS[language] || 'Hello';
+    const greeting = GREETINGS[language as string] || 'Hello';
 
     let messageName = name;
     if (!_argValidator.checkString(name, 1)) {

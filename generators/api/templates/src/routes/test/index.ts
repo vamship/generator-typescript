@@ -26,21 +26,30 @@ router.get('/error/:type', (req, res, next) => {
     switch (errorType.toLowerCase()) {
         case 'badrequest':
             next(new BadRequestError());
+            break;
         case 'notfound':
             next(new NotFoundError());
+            break;
         case 'unauthorized':
             next(new UnauthorizedError());
+            break;
         case 'forbidden':
             next(new ForbiddenError());
+            break;
         case 'schema':
             next(new SchemaError());
+            break;
         case 'duplicaterecord':
             next(new DuplicateRecordError());
+            break;
         case 'concurrencycontrol':
             next(new ConcurrencyControlError());
+            break;
         case 'error':
+            break;
         default:
             next(new Error());
+            break;
     }
 });
 
