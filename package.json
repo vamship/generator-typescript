@@ -1,14 +1,21 @@
 {
     "name": "@vamship/generator-typescript",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Yeoman generator for typescript projects",
     "author": {
         "name": "Vamshi K Ponnapalli",
         "email": "vamshi.ponnapalli@gmail.com"
     },
-    "files": ["generators", "typescript"],
+    "files": [
+        "generators",
+        "typescript"
+    ],
     "main": "generators/index.js",
-    "keywords": ["generators", "typescript", "yeoman-generator"],
+    "keywords": [
+        "generators",
+        "typescript",
+        "yeoman-generator"
+    ],
     "devDependencies": {},
     "engines": {
         "npm": ">= 4.0.0"
