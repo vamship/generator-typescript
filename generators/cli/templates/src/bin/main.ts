@@ -7,7 +7,7 @@ import * as _yargs from 'yargs';
 _loggerProvider.configure('<%= projectName %>', {
     extreme: process.env.EXTREME_LOGGING === 'true',
     destination: 'process.stderr',
-    level: process.env.LOG_LEVEL || 'info'
+    level: process.env.LOG_LEVEL || 'info',
 });
 const _logger = _loggerProvider.getLogger('main');
 
