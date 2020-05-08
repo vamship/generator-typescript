@@ -29,11 +29,11 @@ describe('greetingHandler()', () => {
             const name = _testValues.getString('name');
             const ret = greetingHandler({
                 name,
-                language
+                language,
             });
 
             expect(ret).to.deep.equal({
-                message: `Hello, ${name}`
+                message: `Hello, ${name}`,
             });
         });
     });
@@ -42,23 +42,23 @@ describe('greetingHandler()', () => {
         const inputs = [
             {
                 language: 'fr',
-                greeting: 'Bonjour'
+                greeting: 'Bonjour',
             },
             {
                 language: 'en',
-                greeting: 'Hello'
-            }
+                greeting: 'Hello',
+            },
         ];
 
         inputs.forEach(({ language, greeting }) => {
             const name = _testValues.getString('name');
             const ret = greetingHandler({
                 name,
-                language
+                language,
             });
 
             expect(ret).to.deep.equal({
-                message: `${greeting}, ${name}`
+                message: `${greeting}, ${name}`,
             });
         });
     });
@@ -68,11 +68,11 @@ describe('greetingHandler()', () => {
         inputs.forEach((name) => {
             const ret = greetingHandler({
                 name,
-                language: 'en'
+                language: 'en',
             });
 
             expect(ret).to.deep.equal({
-                message: `Hello, there`
+                message: `Hello, there`,
             });
         });
     });

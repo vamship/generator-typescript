@@ -1,7 +1,7 @@
 import {
     args as _argErrors,
     data as _dataErrors,
-    http as _httpErrors
+    http as _httpErrors,
 } from '@vamship/error-types';
 import _loggerProvider from '@vamship/logger';
 
@@ -13,7 +13,7 @@ const {
     BadRequestError,
     NotFoundError,
     UnauthorizedError,
-    ForbiddenError
+    ForbiddenError,
 } = _httpErrors;
 const { DuplicateRecordError, ConcurrencyControlError } = _dataErrors;
 const { SchemaError } = _argErrors;
@@ -31,12 +31,12 @@ export default {
         }
 
         _logger.info('Mounting health check routes', {
-            path: '/health'
+            path: '/health',
         });
         app.use('/health', _healthRoutes);
 
         _logger.info('Mounting greeting routes', {
-            path: '/greeting'
+            path: '/greeting',
         });
         app.use('/greeting', _greetingRoutes);
 
@@ -59,7 +59,7 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof NotFoundError) {
                 res.status(404).json({
-                    error: err.message
+                    error: err.message,
                 });
             } else {
                 next(err);
@@ -70,7 +70,7 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof ConcurrencyControlError) {
                 res.status(409).json({
-                    error: err.message
+                    error: err.message,
                 });
             } else {
                 next(err);
@@ -81,7 +81,7 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof DuplicateRecordError) {
                 res.status(409).json({
-                    error: err.message
+                    error: err.message,
                 });
             } else {
                 next(err);
@@ -92,7 +92,7 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof BadRequestError) {
                 res.status(400).json({
-                    error: err.message
+                    error: err.message,
                 });
             } else {
                 next(err);
@@ -103,7 +103,7 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof UnauthorizedError) {
                 res.status(401).json({
-                    error: err.message
+                    error: err.message,
                 });
             } else {
                 next(err);
@@ -114,7 +114,7 @@ export default {
         app.use((err, req, res, next) => {
             if (err instanceof ForbiddenError) {
                 res.status(403).json({
-                    error: err.message
+                    error: err.message,
                 });
             } else {
                 next(err);
@@ -126,8 +126,8 @@ export default {
             _logger.error(err);
             const message = 'Internal server error';
             res.status(500).json({
-                error: message
+                error: message,
             });
         });
-    }
+    },
 };

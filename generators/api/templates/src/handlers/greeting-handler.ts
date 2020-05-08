@@ -3,12 +3,12 @@ import {
     IContext,
     IExtendedProperties,
     IInput,
-    RequestHandler
+    RequestHandler,
 } from '@vamship/expressjs-routes';
 
 const GREETINGS = {
     en: 'Hello',
-    fr: 'Bonjour'
+    fr: 'Bonjour',
 };
 
 /**
@@ -32,7 +32,7 @@ const greetingHandler: RequestHandler = (
     }
 
     return {
-        message: `${greeting}, ${messageName}`
+        message: `${greeting}, ${messageName}`,
     };
 };
 

@@ -13,7 +13,7 @@ import { testValues as _testValues } from '@vamship/test-utils';
 import Promise from 'bluebird';
 import {
     endpoint,
-    getRouteBuilder as _getRouteBuilder
+    getRouteBuilder as _getRouteBuilder,
 } from '../utils/api-utils';
 
 describe('[/greeting routes]', () => {
@@ -23,7 +23,7 @@ describe('[/greeting routes]', () => {
         it('should return a schema validation error if the language is invalid', () => {
             const inputs = [
                 _testValues.getString('lang1'),
-                _testValues.getString('lang2')
+                _testValues.getString('lang2'),
             ];
             return Promise.map(inputs, (language) => {
                 const name = _testValues.getString('name');
@@ -59,7 +59,7 @@ describe('[/greeting routes]', () => {
         it('should return the correct greeting based on language', () => {
             const inputs = [
                 { language: 'en', greeting: 'Hello' },
-                { language: 'fr', greeting: 'Bonjour' }
+                { language: 'fr', greeting: 'Bonjour' },
             ];
 
             return Promise.map(inputs, ({ language, greeting }) => {
@@ -73,7 +73,7 @@ describe('[/greeting routes]', () => {
                             /^application\/json/
                         );
                         expect(res.body).to.deep.equal({
-                            message: `${greeting}, ${name}`
+                            message: `${greeting}, ${name}`,
                         });
                     });
             });

@@ -1,7 +1,7 @@
 import {
     args as _argErrors,
     data as _dataErrors,
-    http as _httpErrors
+    http as _httpErrors,
 } from '@vamship/error-types';
 import { Router } from 'express';
 
@@ -10,7 +10,7 @@ const {
     BadRequestError,
     NotFoundError,
     UnauthorizedError,
-    ForbiddenError
+    ForbiddenError,
 } = _httpErrors;
 const { DuplicateRecordError, ConcurrencyControlError } = _dataErrors;
 

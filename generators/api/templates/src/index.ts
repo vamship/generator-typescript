@@ -10,9 +10,9 @@ if (!dotenv.config()) {
 }
 
 const logger = loggerProvider
-    .configure('<%= projectName %>', {
+    .configure('temp', {
         extreme: process.env.EXTREME_LOGGING === 'true',
-        level: process.env.LOG_LEVEL || 'info'
+        level: process.env.LOG_LEVEL || 'info',
     })
     .getLogger('main');
 

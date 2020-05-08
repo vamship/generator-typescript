@@ -6,14 +6,14 @@ const routeDefinitions: IRouteDefinition[] = [
         method: 'GET',
         path: '/',
         handler: (): IHealthResponse => ({ status: 'ok' }),
-        inputMapper: (): {} => ({})
+        inputMapper: (): {} => ({}),
     },
     {
         method: 'GET',
         path: '/ready',
         handler: (): IHealthResponse => ({ status: 'ok' }),
-        inputMapper: (): {} => ({})
-    }
+        inputMapper: (): {} => ({}),
+    },
 ];
 
 export default routeDefinitions;

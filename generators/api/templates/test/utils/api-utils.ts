@@ -1,7 +1,7 @@
 /**
  * The endpoint of the test server.
  */
-export const endpoint = `http://localhost:${process.env.PORT||''}`;
+export const endpoint = `http://localhost:${process.env.PORT || ''}`;
 
 /**
  * Returns a route builder function prefixes any path with a mount point. The

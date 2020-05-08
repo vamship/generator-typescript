@@ -11,7 +11,7 @@ const { expect, request } = _chai;
 
 import {
     endpoint,
-    getRouteBuilder as _getRouteBuilder
+    getRouteBuilder as _getRouteBuilder,
 } from '../utils/api-utils';
 
 describe('[/health routes]', () => {
@@ -28,7 +28,7 @@ describe('[/health routes]', () => {
                         /^application\/json/
                     );
                     expect(res.body).to.deep.equal({
-                        status: 'ok'
+                        status: 'ok',
                     });
                 });
         });
@@ -45,7 +45,7 @@ describe('[/health routes]', () => {
                         /^application\/json/
                     );
                     expect(res.body).to.deep.equal({
-                        status: 'ok'
+                        status: 'ok',
                     });
                 });
         });
