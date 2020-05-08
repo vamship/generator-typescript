@@ -4,8 +4,8 @@
     "description": "<%= projectDescription %>",
     "main": "dist/index.js",
     "scripts": {
-        "all": "gulp --series format lint test-unit clean",
-        "test": "gulp test-unit",
+        "all": "gulp --series format lint build test-unit clean",
+        "test": "gulp --series build test-unit",
         "package": "gulp --series clean lint format build test-unit package",
         "publish": "gulp --series clean lint format build test-unit package publish",
         "watch:build": "gulp watch-build",
