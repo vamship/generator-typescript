@@ -53,6 +53,7 @@ module.exports = class extends Generator {
             'src/routes/health/route-definitions.ts',
             'src/routes/health/health-response.ts',
             'src/routes/test/index.ts',
+            '_env',
 
             'test/utils/api-utils.ts',
             'test/e2e/core-routes.ts',
@@ -79,12 +80,6 @@ module.exports = class extends Generator {
                 this.props
             );
         });
-
-        this.fs.copyTpl(
-            this.templatePath('_rc'),
-            this.destinationPath(`.${this.props.projectCamelCasedName}rc`),
-            this.props
-        );
     }
 
     /**

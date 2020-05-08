@@ -1,14 +1,7 @@
-import _configProvider from '@vamship/config';
-
-const _config = _configProvider
-    .configure('<%= projectCamelCasedName %>')
-    .setApplicationScope('test')
-    .getConfig();
-
 /**
  * The endpoint of the test server.
  */
-export const endpoint = `http://localhost:${_config.get('app.defaultPort')}`;
+export const endpoint = `http://localhost:${process.env.PORT||''}`;
 
 /**
  * Returns a route builder function prefixes any path with a mount point. The

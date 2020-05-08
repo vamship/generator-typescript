@@ -1,4 +1,3 @@
-import _configProvider from '@vamship/config';
 import {
     args as _argErrors,
     data as _dataErrors,
@@ -18,7 +17,6 @@ const {
 } = _httpErrors;
 const { DuplicateRecordError, ConcurrencyControlError } = _dataErrors;
 const { SchemaError } = _argErrors;
-const _config = _configProvider.getConfig();
 const _logger = _loggerProvider.getLogger('routes');
 
 /**
@@ -27,7 +25,7 @@ const _logger = _loggerProvider.getLogger('routes');
 export default {
     setup: (app): void => {
         // ----------  Routers ----------
-        if (_config.get('app.enableTestRoutes')) {
+        if (process.env.ENABLE_TEST_ROUTES === 'true') {
             _logger.warn('Mounting test routes. Not intended for production!');
             app.use('/__test__', _testRoutes);
         }
