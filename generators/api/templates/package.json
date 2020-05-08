@@ -4,9 +4,14 @@
     "description": "<%= projectDescription %>",
     "main": "dist/index.js",
     "scripts": {
-        "all": "gulp --series format lint build test-unit clean",
+        "all": "gulp --series format lint test-unit clean",
         "test": "gulp test-unit",
-        "start": "node src/index"
+        "package": "gulp --series clean lint format build test-unit package",
+        "publish": "gulp --series clean lint format build test-unit package publish",
+        "watch:build": "gulp watch-build",
+        "watch:test": "gulp watch-test-unit",
+        "start": "node src/index",
+        "start:dev": "dotenv-load node src/index"
     },
     "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
     "author": "<%= authorName %> <<%= authorEmail %>>",
@@ -25,6 +30,7 @@
         "chai-as-promised": "^7.1.1",
         "fancy-log": "^1.3.3",
         "chai-http": "^4.3.0",
+        "dotenv-load": "^2.0.0",
         "gulp": "^4.0.2",
         "mocha": "^7.0.0",
         "nyc": "^15.0.0",
@@ -57,14 +63,15 @@
     "homepage": "https://<%= gitUrl %>#readme",
     "buildMetadata": {
         "projectType": "api",
+        "requiredEnv": [],
 <% if(dockerRequired) {-%>
         "language": "ts",
         "docker": {
-<%   if(dockerFullRepo) {-%>
-            "repo": "<%= dockerFullRepo %>"
-<%   } else if(dockerCustomRegistry) {-%>
-            "registry": "<%= dockerCustomRegistry %>"
-<%   }-%>
+            "default": {
+                "repo": "<%= dockerFullRepo %>",
+                "buildArgs": {
+                }
+            }
         }
 <% } else {-%>
         "language": "ts"
