@@ -15,14 +15,14 @@ module.exports = {
      * @return {Promise} A promise that is resolved/rejected after user input
      *         is completed.
      */
-    getProjectInfo: function(gen, force) {
+    getProjectInfo: function (gen, force) {
         const properties = [
             'projectNamespace',
             'projectName',
             'projectVersion',
             'projectDescription',
             'projectKeywords',
-            'projectCliName'
+            'projectCliName',
         ];
         const config = {};
         properties.forEach((propName) => {
@@ -44,7 +44,7 @@ module.exports = {
                         return 'Namespaces must start with a "@"';
                     }
                     return true;
-                }
+                },
             });
         }
 
@@ -53,7 +53,10 @@ module.exports = {
                 type: 'input',
                 name: 'projectName',
                 message: 'Project name?',
-                default: (config.projectName || gen.appname).replace(/\s/g, '-')
+                default: (config.projectName || gen.appname).replace(
+                    /\s/g,
+                    '-'
+                ),
             });
         }
 
@@ -65,7 +68,7 @@ module.exports = {
                 when: cliRequired,
                 default: (answers) =>
                     config.projectCliName ||
-                    answers.projectName.replace(/\.js$/, '')
+                    answers.projectName.replace(/\.js$/, ''),
             });
         }
 
@@ -80,7 +83,7 @@ module.exports = {
                         return 'Please enter a SemVer compatible version string';
                     }
                     return true;
-                }
+                },
             });
         }
 
@@ -89,7 +92,7 @@ module.exports = {
                 type: 'input',
                 name: 'projectDescription',
                 message: 'Project description?',
-                default: config.projectDescription || 'My Typescript project'
+                default: config.projectDescription || 'My Typescript project',
             });
         }
 
@@ -107,7 +110,7 @@ module.exports = {
                         .split(',')
                         .map((keyword) => `${keyword.trim()}`)
                         .filter((keyword) => !!keyword);
-                }
+                },
             });
         }
 
@@ -143,13 +146,13 @@ module.exports = {
      * @return {Promise} A promise that is resolved/rejected after user input
      *         is completed.
      */
-    getAuthorInfo: function(gen, force) {
+    getAuthorInfo: function (gen, force) {
         const properties = [
             'authorName',
             'authorEmail',
             'gitUsername',
             'gitUrl',
-            'gitDocumentationUrl'
+            'gitDocumentationUrl',
         ];
         const config = {};
         properties.forEach((propName) => {
@@ -163,7 +166,7 @@ module.exports = {
                 type: 'input',
                 name: 'authorName',
                 message: 'Author name?',
-                default: config.authorName || '__NA__'
+                default: config.authorName || '__NA__',
             });
         }
 
@@ -172,7 +175,7 @@ module.exports = {
                 type: 'input',
                 name: 'authorEmail',
                 message: 'Author email?',
-                default: config.authorEmail || '__NA__'
+                default: config.authorEmail || '__NA__',
             });
         }
 
@@ -192,7 +195,7 @@ module.exports = {
                         return gen.props.projectNamespace.substr(1);
                     }
                     return config.gitUsername || '__NA__';
-                }
+                },
             });
         }
 
@@ -204,7 +207,7 @@ module.exports = {
                 default: (answers) =>
                     `github.com/${answers.gitUsername}/${gen.config.get(
                         'projectName'
-                    )}`
+                    )}`,
             });
         }
 
@@ -220,7 +223,7 @@ module.exports = {
                     return `https://${
                         answers.gitUsername
                     }.github.io/${gen.config.get('projectName')}`;
-                }
+                },
             });
         }
 
@@ -248,11 +251,11 @@ module.exports = {
      * @return {Promise} A promise that is resolved/rejected after user input
      *         is completed.
      */
-    getDockerInfo: function(gen, force) {
+    getDockerInfo: function (gen, force) {
         const properties = [
             'dockerRequired',
             'dockerFullRepo',
-            'dockerRepoHome'
+            'dockerRepoHome',
         ];
         const config = {};
         properties.forEach((propName) => {
@@ -271,7 +274,7 @@ module.exports = {
                 name: 'dockerRequired',
                 message: 'Configure Docker container?',
                 when: dockerOptional,
-                default: true
+                default: true,
             });
         }
 
@@ -287,7 +290,7 @@ module.exports = {
                         return 'Please enter the full docker repo name';
                     }
                     return true;
-                }
+                },
             });
         }
 
@@ -303,7 +306,7 @@ module.exports = {
                         return 'Please enter the docker repo home page';
                     }
                     return true;
-                }
+                },
             });
         }
 
@@ -319,5 +322,57 @@ module.exports = {
                 gen.config.set(propName, propValue);
             });
         });
-    }
+    },
+
+    /**
+     * Prompts a user for database information that the project might require.
+     *
+     * @param {Object} gen Reference to the generator that is invoking
+     *        the prompts.
+     * @param {Booleabn} force A parameter that forces re prompting even if
+     *        values exist in the config file.
+     * @return {Promise} A promise that is resolved/rejected after user input
+     *         is completed.
+     */
+    getDbInfo: function (gen, force) {
+        const properties = ['dbRequired', 'dbType'];
+        const config = {};
+        properties.forEach((propName) => {
+            config[propName] = gen.config.get(propName);
+        });
+
+        const prompts = [];
+
+        if (!config.dbRequired || force) {
+            prompts.push({
+                type: 'confirm',
+                name: 'dbRequired',
+                message: 'Configure database for project?',
+                default: true,
+            });
+        }
+
+        if (!config.dbType || force) {
+            prompts.push({
+                type: 'choice',
+                name: 'dbType',
+                message: 'Select database type:',
+                choices: ['mysql', 'some other database'],
+                default: 1,
+            });
+        }
+
+        return gen.prompt(prompts).then((props) => {
+            gen.props = gen.props || {};
+            properties.forEach((propName) => {
+                let propValue = props[propName];
+                if (propValue === undefined) {
+                    propValue = config[propName];
+                }
+
+                gen.props[propName] = propValue;
+                gen.config.set(propName, propValue);
+            });
+        });
+    },
 };

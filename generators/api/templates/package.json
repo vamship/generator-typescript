@@ -22,12 +22,12 @@
         "build:docs": "openapi-generator generate -i docs/openapi.yaml -g html2 -o docs/generated-html",
 
         "start:dev": "cross-env NODE_ENV=development dotenv-load node working/src/index",
-<% if(rdbmsRequired) {-%>
+<% if(dbRequired && dbType == "mysql" ) {-%>
         "db:migrate:dev": "cross-env NODE_ENV=development dotenv-load knex migrate:latest --knexfile src/db/knexfile.ts",
 <% }-%>
 
         "start": "node src/index",
-<% if(rdbmsRequired) {-%>
+<% if(dbRequired && dbType == "mysql") {-%>
         "db:migrate": "knex migrate:latest --knexfile src/db/knexfile.js"
 <% }-%>
     },
@@ -71,9 +71,13 @@
         "bluebird": "^3.7.2",
         "dotenv": "^8.2.0",
         "dotenv-load": "^2.0.0",
+<% if(dbRequired && dbType == "mysql") {-%>
         "express": "^4.17.1",
-        "knex": "^0.21.1",
-        "knex-stringcase": "^1.4.1"
+        "knex": "^0.21.6",
+        "knex-stringcase": "^1.4.3"
+<% } else {-%>
+        "express": "^4.17.1"
+<% }-%>
     },
 
     "repository": {

@@ -20,12 +20,9 @@ module.exports = class extends Generator {
         this.config.set('_projectType', _consts.SUB_GEN_API);
         return _prompts
             .getProjectInfo(this, true)
-            .then(() => {
-                return _prompts.getAuthorInfo(this, true);
-            })
-            .then(() => {
-                return _prompts.getDockerInfo(this, true);
-            });
+            .then(() => _prompts.getDbInfo(this, true))
+            .then(() => _prompts.getAuthorInfo(this, true))
+            .then(() => _prompts.getDockerInfo(this, true));
     }
 
     /**
@@ -63,7 +60,7 @@ module.exports = class extends Generator {
             'test/unit/handlers/greeting-handler-spec.ts',
 
             'docs/index.md',
-            'logs/_keep'
+            'logs/_keep',
         ].forEach((srcFile) => {
             const tokens = srcFile.split('/');
 
@@ -123,7 +120,7 @@ module.exports = class extends Generator {
             `   ${buildTool} ${tasksCommand}`,
             ``,
             `--------------------------------------------------------------------------------`,
-            ``
+            ``,
         ].forEach((line) => this.log(line));
     }
 };
