@@ -8,7 +8,7 @@ import _loggerProvider from '@vamship/logger';
 import _greetingRoutes from './greeting';
 import _healthRoutes from './health';
 import _testRoutes from './test';
-import Application from 'express';
+import { Application } from 'express';
 
 const {
     BadRequestError,

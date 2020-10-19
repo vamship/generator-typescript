@@ -335,7 +335,7 @@ module.exports = {
      *         is completed.
      */
     getDbInfo: function (gen, force) {
-        const properties = ['dbRequired', 'dbType'];
+        const properties = ['dbRequired', 'dbType', 'dbName'];
         const config = {};
         properties.forEach((propName) => {
             config[propName] = gen.config.get(propName);
@@ -348,17 +348,38 @@ module.exports = {
                 type: 'confirm',
                 name: 'dbRequired',
                 message: 'Configure database for project?',
-                default: true,
+                default:
+                    typeof config.dbRequired === 'undefined'
+                        ? true
+                        : config.dbRequired,
             });
         }
 
         if (!config.dbType || force) {
             prompts.push({
-                type: 'choice',
+                type: 'list',
                 name: 'dbType',
                 message: 'Select database type:',
                 choices: ['mysql', 'some other database'],
-                default: 1,
+                when: (answers) => answers.dbRequired,
+                default: config.dbType || 1,
+            });
+        }
+
+        if (!config.dbName || force) {
+            prompts.push({
+                type: 'input',
+                name: 'dbName',
+                message: 'Database name?',
+                when: (answers) =>
+                    answers.dbRequired && answers.dbType === 'mysql',
+                default: config.dbName,
+                validate: (answer) => {
+                    if (answer.length <= 0) {
+                        return 'Please enter a valid database name';
+                    }
+                    return true;
+                },
             });
         }
 
