@@ -21,10 +21,10 @@
         "npm": ">= 4.0.0"
     },
     "dependencies": {
-        "camelcase": "^6.0.0",
-        "chalk": "^4.0.0",
+        "camelcase": "^6.1.0",
+        "chalk": "^4.1.0",
         "semver": "^7.3.2",
-        "yeoman-generator": "^4.10.0",
+        "yeoman-generator": "^4.12.0",
         "yosay": "^2.0.2"
     },
     "repository": "https://github.com/vamship/generator-typescript",
