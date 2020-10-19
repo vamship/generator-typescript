@@ -8,6 +8,7 @@ import _loggerProvider from '@vamship/logger';
 import _greetingRoutes from './greeting';
 import _healthRoutes from './health';
 import _testRoutes from './test';
+import Application from 'express';
 
 const {
     BadRequestError,
@@ -23,7 +24,7 @@ const _logger = _loggerProvider.getLogger('routes');
  * @module routes
  */
 export default {
-    setup: (app): void => {
+    setup: (app: Application): void => {
         // ----------  Routers ----------
         if (process.env.ENABLE_TEST_ROUTES === 'true') {
             _logger.warn('Mounting test routes. Not intended for production!');
