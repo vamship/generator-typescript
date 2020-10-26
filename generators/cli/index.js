@@ -32,8 +32,7 @@ module.exports = class extends Generator {
      * Creates project files
      */
     createProjectFiles() {
-        [
-            'Dockerfile',
+        const fileList = [
             'package.json',
             'Gulpfile.js',
             'README.md',
@@ -48,8 +47,14 @@ module.exports = class extends Generator {
             'src/commands/greet.ts',
             'test/unit/commands/greet-spec.ts',
 
-            'docs/index.md'
-        ].forEach((srcFile) => {
+            'docs/index.md',
+        ];
+
+        if (this.props.dockerRequired) {
+            fileList.push('Dockerfile');
+        }
+
+        fileList.forEach((srcFile) => {
             const tokens = srcFile.split('/');
 
             // Replace leading _ with . in the file name
@@ -114,7 +119,7 @@ module.exports = class extends Generator {
             `   ${buildTool} ${tasksCommand}`,
             ``,
             `--------------------------------------------------------------------------------`,
-            ``
+            ``,
         ].forEach((line) => this.log(line));
     }
 };

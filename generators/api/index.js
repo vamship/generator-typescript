@@ -30,7 +30,6 @@ module.exports = class extends Generator {
      */
     createProjectFiles() {
         const fileList = [
-            'Dockerfile',
             'package.json',
             'Gulpfile.js',
             'README.md',
@@ -62,11 +61,17 @@ module.exports = class extends Generator {
             'docs/index.md',
             'logs/_keep',
         ];
+
+        if (this.props.dockerRequired) {
+            fileList.push('Dockerfile');
+        }
+
         if(this.props.dbType === 'mysql') {
             fileList.push('src/db/knexfile.ts');
             fileList.push('src/db/migrations/_keep');
             fileList.push('src/db/seeds/_keep');
         }
+
         fileList.forEach((srcFile) => {
             const tokens = srcFile.split('/');
 
