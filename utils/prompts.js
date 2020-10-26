@@ -267,13 +267,17 @@ module.exports = {
             [_consts.SUB_GEN_CLI, _consts.SUB_GEN_API].indexOf(
                 gen.config.get('_projectType')
             ) >= 0;
+        const dockerMandatory =
+            [_consts.SUB_GEN_CONTAINER].indexOf(
+                gen.config.get('_projectType')
+            ) >= 0;
 
         if (!config.dockerRequired || force) {
             prompts.push({
                 type: 'confirm',
                 name: 'dockerRequired',
                 message: 'Configure Docker container?',
-                when: dockerOptional,
+                when: dockerOptional && !dockerMandatory,
                 default: true,
             });
         }
@@ -283,7 +287,10 @@ module.exports = {
                 type: 'input',
                 name: 'dockerFullRepo',
                 message: 'Docker repo full name?',
-                when: (answers) => !dockerOptional || answers.dockerRequired,
+                when: (answers) =>
+                    !dockerOptional ||
+                    dockerMandatory ||
+                    answers.dockerRequired,
                 default: config.dockerFullRepo,
                 validate: (answer) => {
                     if (typeof answer !== 'string' || answer.length <= 0) {
@@ -299,7 +306,10 @@ module.exports = {
                 type: 'input',
                 name: 'dockerRepoHome',
                 message: 'Docker repo home page?',
-                when: (answers) => !dockerOptional || answers.dockerRequired,
+                when: (answers) =>
+                    !dockerOptional ||
+                    dockerMandatory ||
+                    answers.dockerRequired,
                 default: config.dockerRepoHome,
                 validate: (answer) => {
                     if (typeof answer !== 'string' || answer.length <= 0) {
