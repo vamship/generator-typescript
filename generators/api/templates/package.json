@@ -28,7 +28,10 @@
 
         "start": "node src/index",
 <% if(dbRequired && dbType == "mysql") {-%>
+        "start": "node src/index",
         "db:migrate": "knex migrate:latest --knexfile src/db/knexfile.js"
+<% } else {-%>
+        "start": "node src/index"
 <% }-%>
     },
     "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
