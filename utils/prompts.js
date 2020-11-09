@@ -19,6 +19,7 @@ module.exports = {
         const properties = [
             'projectNamespace',
             'projectName',
+            'projectPrefix',
             'projectVersion',
             'projectDescription',
             'projectKeywords',
@@ -32,6 +33,8 @@ module.exports = {
         const prompts = [];
         const cliRequired =
             gen.config.get('_projectType') === _consts.SUB_GEN_CLI;
+        const prefixRequired =
+            gen.config.get('_projectType') === _consts.SUB_GEN_AWS;
 
         if (config.projectNamespace === undefined || force) {
             prompts.push({
@@ -57,6 +60,21 @@ module.exports = {
                     /\s/g,
                     '-'
                 ),
+            });
+        }
+
+        if (!config.projectPrefix || force) {
+            prompts.push({
+                type: 'input',
+                name: 'projectPrefix',
+                message: 'Project prefix (3 characters)?',
+                when: prefixRequired,
+                validate: (answer) => {
+                    if (!answer.match(/[a-z]{3}/)) {
+                        return 'Please enter exactly 3 lowercase letters';
+                    }
+                    return true;
+                },
             });
         }
 
