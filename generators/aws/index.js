@@ -20,9 +20,8 @@ module.exports = class extends Generator {
         this.config.set('_projectType', _consts.SUB_GEN_AWS);
         return _prompts
             .getProjectInfo(this, true)
-            .then(() => _prompts.getDbInfo(this, true))
             .then(() => _prompts.getAuthorInfo(this, true))
-            .then(() => _prompts.getDockerInfo(this, true));
+            .then(() => _prompts.getAwsInfo(this, true));
     }
 
     /**

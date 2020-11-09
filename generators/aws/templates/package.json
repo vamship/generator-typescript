@@ -100,8 +100,7 @@
             "AWS_PROFILE"
         ],
         "aws": {
-            "region": "<%= infraAwsRegion %>",
-            "profile": "<%= infraAwsProfile %>",
+            "region": "<%= awsRegion %>",
             "stacks": {
                 "core": "<%= projectPrefix %>-core",
                 "api": "<%= projectPrefix %>-api"
