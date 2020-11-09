@@ -1,0 +1,12 @@
+LOG_LEVEL='info'
+EXTREME_LOGGING='false'
+PORT=3000
+ENABLE_TEST_ROUTES='true'
+<% if(dbRequired && dbType == "mysql" ) {-%>
+
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_DATABASE_NAME=<%= dbName %>
+MYSQL_USERNAME=root
+MYSQL_PASSWORD=admin
+<% }-%>
