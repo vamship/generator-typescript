@@ -1,5 +1,3 @@
-use strict';
-
 import {
     argValidator as _argValidator,
     schemaHelper as _schemaHelper
