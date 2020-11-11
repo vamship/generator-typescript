@@ -29,8 +29,7 @@ class AeComplianceCheckerFactory extends ConstructFactory<Function> {
             description: lambdaDesc,
             handler: `src/index.greetingHandler`,
             code: Code.fromAsset(lambdaPackage),
-            environment: {
-            },
+            environment: {},
             role,
             vpc,
         });

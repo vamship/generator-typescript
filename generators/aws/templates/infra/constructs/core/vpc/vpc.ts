@@ -87,4 +87,3 @@ class VpcFactory extends ConstructFactory<Vpc> {
 
 const factory = new VpcFactory('<%= projectPrefix %>-vpc');
 export default factory;
-

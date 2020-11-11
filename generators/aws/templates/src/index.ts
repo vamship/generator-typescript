@@ -21,8 +21,8 @@ interface IHandlerInfo {
 const handlers: IHandlerInfo[] = [
     {
         name: 'greetingHandler',
-        handler: greetingHandler
-    }
+        handler: greetingHandler,
+    },
 ];
 
 const wrapper = new HandlerWrapper('<%= projectCamelCasedName %>');

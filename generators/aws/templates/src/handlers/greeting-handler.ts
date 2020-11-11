@@ -1,6 +1,6 @@
 import {
     argValidator as _argValidator,
-    schemaHelper as _schemaHelper
+    schemaHelper as _schemaHelper,
 } from '@vamship/arg-utils';
 import _schema from '../schema/greeting-handler-schema.json';
 const _schemaChecker = _schemaHelper.createSchemaChecker(_schema);
@@ -15,7 +15,11 @@ import { IContext, IExt, IGreetingInput } from '../types/types';
  * @param {Object} ext Extended properties containing references to injected
  *        properties such as config, logger, etc.
  */
-export const handler = (event: IRegisterClusterInput, context: IContext, ext: IExt) => {
+export const handler = (
+    event: IRegisterClusterInput,
+    context: IContext,
+    ext: IExt
+) => {
     const { logger, config, alias } = ext;
 
     logger.trace('Executing lambda handler', { config, alias });

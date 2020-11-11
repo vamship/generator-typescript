@@ -22,14 +22,18 @@ export default class VpcRefFactory extends ConstructFactory<IVpc> {
         new Array(availabilityZoneCount).fill(0).map((item, azIndex) => {
             // Build azs from lookups
             availabilityZones.push(
-                Fn.importValue(`${scope.stackName}:availability-zone-${azIndex}`)
+                Fn.importValue(
+                    `${scope.stackName}:availability-zone-${azIndex}`
+                )
             );
 
             // Build public subnet ids from lookups
             new Array(publicSubnetsPerAz).fill(0).forEach((item, index) => {
                 const subnetIndex = publicSubnetsPerAz * azIndex + index;
                 publicSubnetIds.push(
-                    Fn.importValue(`${scope.stackName}:public-subnet-${subnetIndex}`)
+                    Fn.importValue(
+                        `${scope.stackName}:public-subnet-${subnetIndex}`
+                    )
                 );
             });
 
@@ -37,7 +41,9 @@ export default class VpcRefFactory extends ConstructFactory<IVpc> {
             new Array(privateSubnetsPerAz).fill(0).forEach((item, index) => {
                 const subnetIndex = privateSubnetsPerAz * azIndex + index;
                 privateSubnetIds.push(
-                    Fn.importValue(`${scope.stackName}:private-subnet-${subnetIndex}`)
+                    Fn.importValue(
+                        `${scope.stackName}:private-subnet-${subnetIndex}`
+                    )
                 );
             });
         });
