@@ -1,7 +1,4 @@
-import {
-    argValidator as _argValidator,
-    schemaHelper as _schemaHelper,
-} from '@vamship/arg-utils';
+import { schemaHelper as _schemaHelper, } from '@vamship/arg-utils';
 import _schema from '../schema/greeting-handler-schema.json';
 const _schemaChecker = _schemaHelper.createSchemaChecker(_schema);
 import {
@@ -40,7 +37,7 @@ export const handler = (
     const greeting = language === Languages.ENGLISH ? 'Hello' : 'Bonjour';
 
     return {
-        message: `${greeting}, ${messageName}`,
+        message: `${greeting}, ${name}`,
     };
 };
 
