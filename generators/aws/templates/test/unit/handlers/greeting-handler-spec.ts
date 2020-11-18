@@ -1,44 +1,84 @@
+import _loggerProvider from '@vamship/logger';
+_loggerProvider.enableMock();
+
 import _chai from 'chai';
 import _chaiAsPromised from 'chai-as-promised';
-import 'mocha';
-import _rewire from 'rewire';
 import _sinonChai from 'sinon-chai';
-
 _chai.use(_chaiAsPromised);
 _chai.use(_sinonChai);
 const expect = _chai.expect;
 
 import { testValues as _testValues } from '@vamship/test-utils';
+import { LambdaTestWrapper, InputValidator } from '@vamship/aws-test-utils';
+import _rewire from 'rewire';
+import { Promise } from 'bluebird';
 
-const _greetingHandlerModule = _rewire(
-    '../../../src/handlers/greeting-handler'
-);
-const greetingHandler = _greetingHandlerModule.default;
+import {
+    IGreetingInput,
+    IGreetingOutput,
+    IContext,
+    IExt,
+} from '../../../src/types';
 
-describe('greetingHandler()', () => {
-    it('should return an object when invoked', () => {
-        const ret = greetingHandler({});
+const _handlerName = 'index.greetingHandler';
+type GreetingHandler = (
+    event: IGreetingInput,
+    context: IContext,
+    ext: IExt
+) => IGreetingOutput;
 
-        expect(ret).to.be.an('object');
-        expect(ret.message).to.be.a('string').and.to.not.be.empty;
+let _handlerModule: { default: GreetingHandler };
+let _handler: GreetingHandler;
+
+describe('[index.greetingHandler]', () => {
+    function _createWrapper(event?) {
+        event = Object.assign(
+            {
+                name: _testValues.getString('name'),
+                language: 'en',
+            },
+            event
+        );
+        return new LambdaTestWrapper(_handlerName, _handler, event);
+    }
+
+    beforeEach(() => {
+        _handlerModule = _rewire('../../../src/handlers/greeting-handler');
+        _handler = _handlerModule.default;
     });
 
-    it('should return a message for the default language if the language is not recognized', () => {
-        const inputs = ['es', 'it'];
-        inputs.forEach((language) => {
-            const name = _testValues.getString('name');
-            const ret = greetingHandler({
-                name,
-                language,
-            });
+    it('should fail execution if the event input does not define a valid name property', () => {
+        const wrapper = _createWrapper();
+        const validator = new InputValidator(wrapper);
 
-            expect(ret).to.deep.equal({
-                message: `Hello, ${name}`,
-            });
-        });
+        return validator.checkRequiredString(
+            'name',
+            (wrapper, type, pattern) => {
+                return expect(wrapper.invoke()).to.be.rejectedWith(
+                    type,
+                    pattern
+                );
+            }
+        );
     });
 
-    it('should return a message based on the language if the language is recognized', () => {
+    it('should fail execution if the event input does not define a valid language property', () => {
+        const wrapper = _createWrapper();
+        const validator = new InputValidator(wrapper);
+
+        return validator.checkRequiredString(
+            'language',
+            (wrapper, type, pattern) => {
+                return expect(wrapper.invoke()).to.be.rejectedWith(
+                    type,
+                    pattern
+                );
+            },
+            ['es', 'it']
+        );
+    });
+
+    it('should return a message based on the language if the language is recognized', async () => {
         const inputs = [
             {
                 language: 'fr',
@@ -50,29 +90,14 @@ describe('greetingHandler()', () => {
             },
         ];
 
-        inputs.forEach(({ language, greeting }) => {
+        await Promise.map(inputs, async ({ language, greeting }) => {
             const name = _testValues.getString('name');
-            const ret = greetingHandler({
-                name,
-                language,
-            });
+            const wrapper = _createWrapper({ name, language });
+
+            const ret = await wrapper.invoke();
 
             expect(ret).to.deep.equal({
                 message: `${greeting}, ${name}`,
-            });
-        });
-    });
-
-    it('should default the name to "there" if no name is specified', () => {
-        const inputs = _testValues.allButString('');
-        inputs.forEach((name) => {
-            const ret = greetingHandler({
-                name,
-                language: 'en',
-            });
-
-            expect(ret).to.deep.equal({
-                message: `Hello, there`,
             });
         });
     });

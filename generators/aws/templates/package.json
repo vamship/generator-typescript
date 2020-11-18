@@ -19,11 +19,7 @@
         "edit:docs": "docker run -d --env URL=docs/openapi.yaml -p 9000:8080 -v $(pwd)/docs:/usr/share/nginx/html/docs swaggerapi/swagger-editor",
 
         "build": "gulp build",
-        "build:docs": "openapi-generator generate -i docs/openapi.yaml -g html2 -o docs/generated-html",
-
-        "start:dev": "cross-env NODE_ENV=development dotenv-load node working/src/index",
-
-        "start": "node src/index"
+        "build:docs": "openapi-generator generate -i docs/openapi.yaml -g html2 -o docs/generated-html"
     },
     "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
     "author": "<%= authorName %> <<%= authorEmail %>>",
@@ -57,7 +53,10 @@
         "aws-cdk": "^1.73.0",
         "chai": "^4.2.0",
         "chai-as-promised": "^7.1.1",
+        "cross-env": "^7.0.2",
         "docdash": "^1.2.0",
+        "dotenv": "^8.2.0",
+        "dotenv-load": "^2.0.0",
         "gulp": "^4.0.2",
         "mocha": "^8.2.1",
         "nyc": "^15.1.0",

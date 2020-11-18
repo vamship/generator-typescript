@@ -37,12 +37,6 @@ export const handler = (
     logger.trace({ event }, 'Handler input');
 
     const { name, language } = event;
-
-    let messageName = name;
-    if (!_argValidator.checkString(name, 1)) {
-        messageName = 'there';
-    }
-
     const greeting = language === Languages.ENGLISH ? 'Hello' : 'Bonjour';
 
     return {
