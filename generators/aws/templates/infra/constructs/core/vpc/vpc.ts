@@ -2,7 +2,6 @@ import { NatProvider, SubnetType, Vpc } from '@aws-cdk/aws-ec2';
 import { CfnOutput, Stack } from '@aws-cdk/core';
 import {
     ConstructFactory,
-    EnvUtils,
     IConstructProps,
 } from '@vamship/cdk-utils';
 import {

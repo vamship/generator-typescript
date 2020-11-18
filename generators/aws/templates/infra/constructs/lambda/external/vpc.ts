@@ -7,12 +7,12 @@ import {
     availabilityZoneCount,
     publicSubnetsPerAz,
     privateSubnetsPerAz,
-} from './vpc-config';
+} from '../../../utils/vpc-config';
 
 /**
  * Construct factory that returns a reference to an existing VPC.
  */
-export default class VpcRefFactory extends ConstructFactory<IVpc> {
+class VpcRefFactory extends ConstructFactory<IVpc> {
     public async _init(scope: Stack, props: IConstructProps): Promise<IVpc> {
         const vpcId = Fn.importValue(`${scope.stackName}:vpc-id`);
         const availabilityZones: string[] = [];
