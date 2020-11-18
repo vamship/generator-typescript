@@ -9,7 +9,6 @@
         "lint": "gulp lint",
         "test": "cross-env NODE_ENV=development dotenv-load  gulp --series clean build test-unit",
         "package": "cross-env NODE_ENV=test dotenv-load gulp --series clean format lint build test-unit package",
-        "publish": "gulp publish",
         "all": "gulp --series clean format lint build test-unit clean",
 
         "watch:build": "gulp watch-build",
@@ -19,7 +18,10 @@
         "edit:docs": "docker run -d --env URL=docs/openapi.yaml -p 9000:8080 -v $(pwd)/docs:/usr/share/nginx/html/docs swaggerapi/swagger-editor",
 
         "build": "gulp build",
-        "build:docs": "openapi-generator generate -i docs/openapi.yaml -g html2 -o docs/generated-html"
+        "build:docs": "openapi-generator generate -i docs/openapi.yaml -g html2 -o docs/generated-html",
+
+        "publish:core": "gulp publish-core",
+        "publish:lambda": "gulp publish-lambda"
     },
     "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
     "author": "<%= authorName %> <<%= authorEmail %>>",
@@ -102,7 +104,7 @@
             "region": "<%= awsRegion %>",
             "stacks": {
                 "core": "<%= projectPrefix %>-core",
-                "api": "<%= projectPrefix %>-api"
+                "lambda": "<%= projectPrefix %>-lambda"
             }
         }
     }
