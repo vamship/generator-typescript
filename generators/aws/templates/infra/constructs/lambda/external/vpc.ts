@@ -14,7 +14,7 @@ import {
  */
 class VpcRefFactory extends ConstructFactory<IVpc> {
     public async _init(scope: Stack, props: IConstructProps): Promise<IVpc> {
-        const vpcId = Fn.importValue(`${scope.stackName}:vpc-id`);
+        const vpcId = Fn.importValue(`<%= projectPrefix %>-core:vpc-id`);
         const availabilityZones: string[] = [];
         const publicSubnetIds: string[] = [];
         const privateSubnetIds: string[] = [];
@@ -23,7 +23,7 @@ class VpcRefFactory extends ConstructFactory<IVpc> {
             // Build azs from lookups
             availabilityZones.push(
                 Fn.importValue(
-                    `${scope.stackName}:availability-zone-${azIndex}`
+                    `<%= projectPrefix %>-core:availability-zone-${azIndex}`
                 )
             );
 
@@ -32,7 +32,7 @@ class VpcRefFactory extends ConstructFactory<IVpc> {
                 const subnetIndex = publicSubnetsPerAz * azIndex + index;
                 publicSubnetIds.push(
                     Fn.importValue(
-                        `${scope.stackName}:public-subnet-${subnetIndex}`
+                        `<%= projectPrefix %>-core:public-subnet-${subnetIndex}`
                     )
                 );
             });
@@ -42,7 +42,7 @@ class VpcRefFactory extends ConstructFactory<IVpc> {
                 const subnetIndex = privateSubnetsPerAz * azIndex + index;
                 privateSubnetIds.push(
                     Fn.importValue(
-                        `${scope.stackName}:private-subnet-${subnetIndex}`
+                        `<%= projectPrefix %>-core:private-subnet-${subnetIndex}`
                     )
                 );
             });

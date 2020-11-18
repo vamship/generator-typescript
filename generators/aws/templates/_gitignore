@@ -40,3 +40,6 @@ logs/*
 node_modules
 .idea
 !.gitignore
+
+# CDK output directory
+cdk.out/
