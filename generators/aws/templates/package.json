@@ -47,7 +47,7 @@
         "@types/sinon": "^9.0.8",
         "@vamship/aws-test-utils": "^2.0.0",
         "@vamship/build-utils": "0.4.3",
-        "@vamship/cdk-utils": "^1.1.6",
+        "@vamship/cdk-utils": "^1.1.7",
         "@vamship/config": "^1.4.9",
         "@vamship/error-types": "^1.7.11",
         "@vamship/test-utils": "^2.4.12",
