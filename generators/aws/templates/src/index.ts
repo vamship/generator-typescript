@@ -15,7 +15,7 @@ interface IHandlerInfo {
     /**
      * Reference to the handler function.
      */
-    handler: Function;
+    handler: unknown;
 }
 
 const handlers: IHandlerInfo[] = [
@@ -28,7 +28,7 @@ const handlers: IHandlerInfo[] = [
 const wrapper = new HandlerWrapper('<%= projectCamelCasedName %>');
 
 module.exports = handlers.reduce(
-    (result: { [key: string]: Function }, handlerInfo: IHandlerInfo) => {
+    (result: { [key: string]: unknown }, handlerInfo: IHandlerInfo) => {
         const { name, handler } = handlerInfo;
 
         result[name] = wrapper.wrap(handler, name);

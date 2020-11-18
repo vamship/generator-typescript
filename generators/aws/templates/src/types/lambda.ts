@@ -46,7 +46,9 @@ export interface IExt {
         /**
          * Retrieves a config value using a dot separated config key.
          */
-        get: (key: string) => string | number | boolean | {};
+        get: (
+            key: string
+        ) => string | number | boolean | Record<string, unknown>;
     };
 
     /**

@@ -4,7 +4,13 @@ import {
 } from '@vamship/arg-utils';
 import _schema from '../schema/greeting-handler-schema.json';
 const _schemaChecker = _schemaHelper.createSchemaChecker(_schema);
-import { IContext, IExt, IGreetingInput, Languages } from '../types';
+import {
+    IContext,
+    IExt,
+    IGreetingInput,
+    IGreetingOutput,
+    Languages,
+} from '../types';
 
 /**
  * Deletes an entity record of the given cluster, and removes the standard secret
@@ -19,7 +25,7 @@ export const handler = (
     event: IGreetingInput,
     context: IContext,
     ext: IExt
-) => {
+): IGreetingOutput => {
     const { logger, config, alias } = ext;
 
     logger.trace({ alias, config }, 'Executing lambda handler');
@@ -37,7 +43,7 @@ export const handler = (
         messageName = 'there';
     }
 
-    const greeting = language === Languages.ENGLISH? 'Hello': 'Bonjour';
+    const greeting = language === Languages.ENGLISH ? 'Hello' : 'Bonjour';
 
     return {
         message: `${greeting}, ${messageName}`,

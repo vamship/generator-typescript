@@ -14,9 +14,19 @@ export interface IGreetingInput {
 }
 
 /**
+ * Describes the output of the greeting handler.
+ */
+export interface IGreetingOutput {
+    /**
+     * The greeting message to respond with.
+     */
+    message: string;
+}
+
+/**
  * Enumeration of supported languages for greetings.
  */
 export enum Languages {
     ENGLISH = 'en',
-    FRENCH = 'fr'
+    FRENCH = 'fr',
 }
