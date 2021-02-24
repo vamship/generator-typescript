@@ -1,5 +1,5 @@
 import { schemaHelper as _schemaHelper } from '@vamship/arg-utils';
-import _schema from '../schema/greeting-handler-schema.json';
+import _schema from '../schema/greeting-handler.json';
 const _schemaChecker = _schemaHelper.createSchemaChecker(_schema);
 import {
     IContext,
