@@ -10,8 +10,7 @@ import {
 } from '../types';
 
 /**
- * Deletes an entity record of the given cluster, and removes the standard secret
- * stores from Knox.
+ * Handler that greets the end user.
  *
  * @param {Object} event The lambda event object
  * @param {Object} context The lambda context object
