@@ -4,7 +4,7 @@ import { ConstructFactory, IConstructProps } from '@vamship/cdk-utils';
 import vpcFactory from '../external/vpc';
 import { lambdaPackage, lambdaDefaults } from '../../../utils/lambda-config';
 
-class AeComplianceCheckerFactory extends ConstructFactory<LambdaFunction> {
+class GreetingFactory extends ConstructFactory<LambdaFunction> {
     /**
      * @override
      */
@@ -31,5 +31,5 @@ class AeComplianceCheckerFactory extends ConstructFactory<LambdaFunction> {
     }
 }
 
-const factory = new AeComplianceCheckerFactory('<%= projectPrefix %>-greeting');
+const factory = new GreetingFactory('<%= projectPrefix %>-greeting');
 export default factory;
