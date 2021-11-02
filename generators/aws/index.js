@@ -42,7 +42,7 @@ module.exports = class extends Generator {
             'src/index.ts',
             'src/handlers/greeting-handler.ts',
 
-            'src/schema/greeting-handler-schema.json',
+            'src/schema/greeting-handler.json',
 
             'src/types/index.ts',
             'src/types/greeting.ts',
