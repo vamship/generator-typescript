@@ -10,12 +10,8 @@ import _healthRoutes from './health';
 import _testRoutes from './test';
 import { Application } from 'express';
 
-const {
-    BadRequestError,
-    NotFoundError,
-    UnauthorizedError,
-    ForbiddenError,
-} = _httpErrors;
+const { BadRequestError, NotFoundError, UnauthorizedError, ForbiddenError } =
+    _httpErrors;
 const { DuplicateRecordError, ConcurrencyControlError } = _dataErrors;
 const { SchemaError } = _argErrors;
 const _logger = _loggerProvider.getLogger('routes');

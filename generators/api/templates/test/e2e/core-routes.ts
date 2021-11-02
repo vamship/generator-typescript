@@ -29,8 +29,7 @@ describe('[core routes]', () => {
                         /^application\/json/
                     );
                     expect(res.body).to.deep.equal({
-                        error:
-                            '[BadRequestError] Incorrect or malformed request',
+                        error: '[BadRequestError] Incorrect or malformed request',
                     });
                     expect(res.error).to.exist;
                 });
@@ -46,8 +45,7 @@ describe('[core routes]', () => {
                         /^application\/json/
                     );
                     expect(res.body).to.deep.equal({
-                        error:
-                            '[BadRequestError] [SchemaError] Schema validation failed',
+                        error: '[BadRequestError] [SchemaError] Schema validation failed',
                     });
                     expect(res.error).to.exist;
                 });
@@ -81,8 +79,7 @@ describe('[core routes]', () => {
                         /^application\/json/
                     );
                     expect(res.body).to.deep.equal({
-                        error:
-                            '[ConcurrencyControlError] Concurrency check failed',
+                        error: '[ConcurrencyControlError] Concurrency check failed',
                     });
                     expect(res.error).to.exist;
                 });
@@ -118,8 +115,7 @@ describe('[core routes]', () => {
                         /^application\/json/
                     );
                     expect(res.body).to.deep.equal({
-                        error:
-                            '[ForbiddenError] Access to this resource is forbidden',
+                        error: '[ForbiddenError] Access to this resource is forbidden',
                     });
                     expect(res.error).to.exist;
                 });

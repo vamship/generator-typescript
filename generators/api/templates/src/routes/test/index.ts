@@ -6,12 +6,8 @@ import {
 import { Router } from 'express';
 
 const { SchemaError } = _argErrors;
-const {
-    BadRequestError,
-    NotFoundError,
-    UnauthorizedError,
-    ForbiddenError,
-} = _httpErrors;
+const { BadRequestError, NotFoundError, UnauthorizedError, ForbiddenError } =
+    _httpErrors;
 const { DuplicateRecordError, ConcurrencyControlError } = _dataErrors;
 
 /**
