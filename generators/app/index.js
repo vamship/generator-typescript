@@ -36,27 +36,27 @@ module.exports = class extends Generator {
             switch (answers.templateType) {
                 case _consts.SUB_GEN_API:
                     this.composeWith(
-                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_API}`
+                        require.resolve(`${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_API}`)
                     );
                     break;
                 case _consts.SUB_GEN_LIB:
                     this.composeWith(
-                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_LIB}`
+                        require.resolve(`${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_LIB}`)
                     );
                     break;
                 case _consts.SUB_GEN_CLI:
                     this.composeWith(
-                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_CLI}`
+                        require.resolve(`${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_CLI}`)
                     );
                     break;
                 case _consts.SUB_GEN_AWS:
                     this.composeWith(
-                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_AWS}`
+                        require.resolve(`${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_AWS}`)
                     );
                     break;
                 case _consts.SUB_GEN_CONTAINER:
                     this.composeWith(
-                        `${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_CONTAINER}`
+                        require.resolve(`${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_CONTAINER}`)
                     );
                     break;
             }
