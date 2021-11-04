@@ -27,7 +27,7 @@
         "@types/chai-as-promised": "^7.1.4",
         "@types/mocha": "^9.0.0",
         "@types/sinon-chai": "^3.2.5",
-        "@vamship/arg-utils": "^2.4.16",
+        "@vamship/arg-utils": "^2.4.17",
         "@vamship/build-utils": "1.0.3",
         "@vamship/error-types": "^1.7.18",
         "@vamship/test-utils": "^2.5.6",
