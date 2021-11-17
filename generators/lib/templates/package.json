@@ -27,22 +27,22 @@
         "@types/chai-as-promised": "^7.1.4",
         "@types/mocha": "^9.0.0",
         "@types/sinon-chai": "^3.2.5",
-        "@vamship/arg-utils": "^2.4.17",
-        "@vamship/build-utils": "1.0.3",
-        "@vamship/error-types": "^1.7.18",
-        "@vamship/test-utils": "^2.5.6",
+        "@vamship/arg-utils": "^2.4.18",
+        "@vamship/build-utils": "1.0.4",
+        "@vamship/error-types": "^1.7.19",
+        "@vamship/test-utils": "^2.5.7",
         "chai": "^4.3.4",
         "chai-as-promised": "^7.1.1",
         "cross-env": "^7.0.3",
         "dotenv-load": "^2.0.0",
         "rewire": "^5.0.0",
-        "sinon": "^11.1.2",
+        "sinon": "^12.0.1",
         "sinon-chai": "^3.7.0",
-        "typedoc": "^0.22.7",
+        "typedoc": "^0.22.9",
         "typescript": "^4.4.4"
     },
     "dependencies": {
-        "ajv": "^8.6.3"
+        "ajv": "^8.8.1"
     },
     "engines": {
         "node": ">= 14.18.1",
