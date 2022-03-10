@@ -1,0 +1,116 @@
+{
+    "private": true,
+    "name": "<%= projectNamespacedName %>",
+    "version": "<%= projectVersion %>",
+    "description": "<%= projectDescription %>",
+    "dependencies": {
+        "@emotion/react": "^11.4.1",
+        "@emotion/styled": "^11.3.0",
+        "@fontsource/barlow": "^4.5.0",
+        "@fontsource/dm-sans": "^4.5.0",
+        "@vamship/build-utils": "1.0.4",
+        "axios": "^0.21.1",
+        "formik": "^2.2.9",
+        "history": "^5.0.1",
+        "match-sorter": "^6.3.0",
+        "miragejs": "^0.1.41",
+        "moment": "^2.29.1",
+        "moment-timezone": "^0.5.34",
+        "query-string": "^7.1.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-helmet-async": "^1.1.2",
+        "react-router-dom": "^5.2.0",
+        "react-table": "^7.7.0",
+        "recoil": "^0.4.0",
+        "yup": "^0.32.11"
+    },
+    "devDependencies": {
+        "@storybook/addon-essentials": "^6.3.7",
+        "@storybook/addons": "^6.3.7",
+        "@storybook/react": "^6.3.7",
+        "@storybook/theming": "^6.3.7",
+        "@testing-library/react": "^12.1.2",
+        "@types/jest": "^27.0.2",
+        "@types/node": "^14.17.10",
+        "@types/query-string": "^6.3.0",
+        "@types/react": "^17.0.19",
+        "@types/react-dom": "^17.0.9",
+        "@types/react-router-dom": "^5.1.8",
+        "@types/react-table": "^7.7.2",
+        "@types/react-test-renderer": "^17.0.1",
+        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "@typescript-eslint/parser": "^4.29.2",
+        "@vitejs/plugin-react-refresh": "^1.3.6",
+        "cross-env": "^7.0.3",
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.24.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-react": "^7.24.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "jest": "^27.3.1",
+        "jest-environment-jsdom": "^27.3.1",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.3.2",
+        "react-test-renderer": "^17.0.2",
+        "storybook-builder-vite": "^0.0.12",
+        "ts-jest": "^27.0.7",
+        "typescript": "^4.3.5",
+        "vite": "^2.5.0"
+    },
+    "files": [ "package.json", "LICENSE", "README.md", "src/**/*" ],
+    "author": "<%= authorName %> <<%= authorEmail %>>",
+    "keywords": <%- JSON.stringify(projectKeywords) %>,
+    "license": "MIT",
+    "engines": {
+        "node": ">= 14.18.1",
+        "npm": ">= 8.1.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://<%= gitUrl %>.git"
+    },
+    "bugs": {
+        "url": "https://<%= gitUrl %>/issues"
+    },
+    "homepage": "https://<%= gitUrl %>#readme",
+    "scripts": {
+        "clean": "gulp clean",
+        "format": "gulp format",
+        "lint": "gulp lint",
+        "build": "gulp build",
+        "test": "cross-env NODE_ENV=test gulp --series clean test-unit",
+        "package": "cross-env NODE_ENV=test gulp --series clean format lint build test-unit package",
+        "all": "cross-env NODE_ENV=test gulp --series clean format lint build test-unit clean",
+        "start": "vite",
+        "serve": "vite preview",
+        "lint:fix": "eslint --fix .",
+        "format:fix": "prettier -w .",
+        "test:watch": "jest --config=jest.config.js --watch",
+        "test:coverage": "jest --config=jest.config.js --coverage",
+        "storybook": "sudo start-storybook --quiet --port=6006",
+        "storybook:build": "build-storybook",
+        "publish:latest": "gulp publish-latest",
+        "publish": "gulp publish"
+    },
+    "buildMetadata": {
+        "projectType": "ui",
+        "requiredEnv": [],
+<% if(dockerRequired) {-%>
+        "language": "ts",
+        "docker": {
+            "default": {
+                "repo": "<%= dockerFullRepo %>",
+                "buildArgs": {
+                }
+            }
+        }
+<% } else {-%>
+        "language": "ts"
+<% }-%>
+    }
+}

@@ -27,6 +27,7 @@ module.exports = class extends Generator {
                     _consts.SUB_GEN_LIB,
                     _consts.SUB_GEN_CLI,
                     _consts.SUB_GEN_AWS,
+                    _consts.SUB_GEN_UI,
                     _consts.SUB_GEN_CONTAINER
                 ],
                 default: 'library'
@@ -52,6 +53,11 @@ module.exports = class extends Generator {
                 case _consts.SUB_GEN_AWS:
                     this.composeWith(
                         require.resolve(`${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_AWS}`)
+                    );
+                    break;
+                case _consts.SUB_GEN_UI:
+                    this.composeWith(
+                        require.resolve(`${_consts.GENERATOR_NAME}:${_consts.SUB_GEN_API}`)
                     );
                     break;
                 case _consts.SUB_GEN_CONTAINER:
