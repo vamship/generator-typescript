@@ -1,6 +1,6 @@
-import { Stack, Fn } from '@aws-cdk/core';
+import { Stack, Fn } from 'aws-cdk-lib';
 import { ConstructFactory, IConstructProps } from '@vamship/cdk-utils';
-import { IVpc, Vpc } from '@aws-cdk/aws-ec2';
+import { IVpc, Vpc } from 'aws-cdk-lib/aws-ec2';
 
 import {
     vpcCidrBlock,

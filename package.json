@@ -1,6 +1,6 @@
 {
     "name": "@vamship/generator-typescript",
-    "version": "4.1.3",
+    "version": "5.0.0",
     "description": "Yeoman generator for typescript projects",
     "author": {
         "name": "Vamshi K Ponnapalli",

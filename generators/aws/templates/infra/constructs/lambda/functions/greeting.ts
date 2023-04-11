@@ -1,5 +1,5 @@
-import { Code, Function as LambdaFunction } from '@aws-cdk/aws-lambda';
-import { Stack } from '@aws-cdk/core';
+import { Code, Function as LambdaFunction } from 'aws-cdk-lib/aws-lambda';
+import { Stack } from 'aws-cdk-lib';
 import { ConstructFactory, IConstructProps } from '@vamship/cdk-utils';
 import vpcFactory from '../external/vpc';
 import { lambdaPackage, lambdaDefaults } from '../../../utils/lambda-config';

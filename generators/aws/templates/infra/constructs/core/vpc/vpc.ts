@@ -1,5 +1,5 @@
-import { NatProvider, SubnetType, Vpc } from '@aws-cdk/aws-ec2';
-import { CfnOutput, Stack } from '@aws-cdk/core';
+import { NatProvider, SubnetType, Vpc } from 'aws-cdk-lib/aws-ec2';
+import { CfnOutput, Stack } from 'aws-cdk-lib';
 import { ConstructFactory, IConstructProps } from '@vamship/cdk-utils';
 import {
     availabilityZoneCount,

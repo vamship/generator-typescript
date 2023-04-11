@@ -1,6 +1,6 @@
 import * as _path from 'path';
 
-import { App, Stack } from '@aws-cdk/core';
+import { App, Stack } from 'aws-cdk-lib';
 import { ConstructBuilder } from '@vamship/cdk-utils';
 
 async function main(): Promise<void> {
