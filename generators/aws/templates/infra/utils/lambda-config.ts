@@ -1,5 +1,5 @@
-import { Runtime } from '@aws-cdk/aws-lambda';
-import { Duration } from '@aws-cdk/core';
+import { Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Duration } from 'aws-cdk-lib';
 import packageJson from '../../package.json';
 
 const { name, version } = packageJson;
